@@ -1,0 +1,43 @@
+﻿using MAC.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace MAC.Models
+{
+    public class MACDbContext : DbContext
+    {
+        public MACDbContext(DbContextOptions<MACDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Proceso> Procesos { get; set; }
+        public DbSet<Rol> Rol { get; set; }
+        public DbSet<RolProceso> RolProcesos { get; set; }
+        public DbSet<UsuarioProceso> UsuariosProceso { get; set; }
+        public DbSet<UsuarioRol> UsuariosRol { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Clave compuesta para RolProceso
+            modelBuilder.Entity<RolProceso>()
+                .HasKey(rp => new { rp.RolId, rp.ProcesoId });
+
+            modelBuilder.Entity<RolProceso>().ToTable("rolproceso");
+
+            // Clave compuesta para UsuarioRol
+            modelBuilder.Entity<UsuarioRol>()
+                .HasKey(ur => new { ur.UsuarioId, ur.RolId });
+
+            modelBuilder.Entity<UsuarioRol>().ToTable("usuariorol");
+
+            // Clave compuesta para UsuarioProceso
+            modelBuilder.Entity<UsuarioProceso>()
+                .HasKey(up => new { up.UsuarioId, up.ProcesoId });
+
+            modelBuilder.Entity<UsuarioProceso>().ToTable("usuarioproceso");
+
+            // Puedes agregar más configuraciones aquí si es necesario
+        }
+    }
+}

@@ -1,0 +1,104 @@
+﻿@model IEnumerable<MAC.Models.Usuario>
+@{
+    ViewBag.Title = "Usuarios del Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var nombreCompleto = @ViewBag.NombreCompleto as string ?? "Usuario";
+    var roles = @ViewBag.Roles as string ?? "";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+</head>
+<body>
+
+    <!-- Main content -->
+    <main class="col-md-10 p-4">
+        <div class="form-group col-sm-12 text-right">
+            <ul class="list-inline text-right">
+                <li><button class="btn btn-outline-secondary btn-sm" style="width: 200px; text-align: center; align-content: end;" type="button" id="btnAgregar" onclick="openModal()"><span class="fa fa-plus-circle text-primary"></span>Agregar</button></li>
+                <li><button class="btn  btn-outline-secondary grid-exportar-excel btn-sm" style="width: 200px; text-align: center; align-content: end;" type="button" id="btExcel" onclick="exportTableToExcel('tablaConsulta', 'datos')"><span class="fa fa-file-excel-o text-success"></span>Exportar Excel</button></li>
+            </ul>
+        </div>
+        <h2>Lista de Usuarios</h2>
+        @if (TempData["Mensaje"] != null)
+        {
+            <div id="mensajeExito" class="alert alert-success">@TempData["Mensaje"]</div>
+        }
+
+        @if (TempData["Errores"] != null)
+        {
+            var errores = TempData["Errores"] as List<string>;
+            <div id="mensajeError" class="alert alert-danger">
+                <ul>
+                    @foreach (var error in errores)
+                    {
+                        <li>@error</li>
+                    }
+                </ul>
+            </div>
+        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Usuario App</th>
+                    <th>Nombre</th>
+                    <th>Ap. Paterno</th>
+                    <th>Ap. Materno</th>
+                    <th>RFC</th>
+                    <th>Homoclave</th>
+                    <th>Correo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in Model)
+                {
+                    <tr>
+                        <td>@usuario.usuarioapp</td>
+                        <td>@usuario.nombre</td>
+                        <td>@usuario.appaterno</td>
+                        <td>@usuario.apmaterno</td>
+                        <td>@usuario.rfc</td>
+                        <td>@usuario.homoclave</td>
+                        <td>@usuario.correo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+    @Html.Partial("_AddUsr")
+    <script>
+        function openModal() {
+            const modalElement = document.getElementById("myModal");
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("myModal");
+            if (modal) {
+                modal.classList.remove("show");
+            }
+        }
+    </script>
+    <script>
+        setTimeout(function () {
+            const mensajeExito = document.getElementById("mensajeExito");
+            const mensajeError = document.getElementById("mensajeError");
+
+            if (mensajeExito) {
+                mensajeExito.style.display = "none";
+            }
+
+            if (mensajeError) {
+                mensajeError.style.display = "none";
+            }
+        }, 2000); // 2 segundos
+    </script>
+
+</body>
+
+</html>
+
+
+
