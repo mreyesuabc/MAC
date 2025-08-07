@@ -13,6 +13,24 @@
           crossorigin="anonymous" />
     <link rel="stylesheet" href="~/css/mystyle.css" />
     <title>BI Armonización Contable</title>
+    <style>
+        .alert-login {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 10px;
+            max-width: fit-content;
+            border: 1px solid #f5c6cb;
+        }
+
+            .alert-login i {
+                margin-right: 6px;
+            }
+    </style>
+
 </head>
 <body>
     <div class="text-center">
@@ -33,13 +51,13 @@
                 <button type="submit" class="btn btn-block btn-md btn-primary">Iniciar sesión</button>
             </div>
         </div>
-
-        @if (ViewBag.Error != null)
+        @if (ViewBag.ErrorLogin != null)
         {
-            <div id="error-message" style="color: red;">
-                <p>@ViewBag.Error</p>
+            <div class="alert-login">
+                <i class="fa fa-exclamation-circle"></i> @ViewBag.ErrorLogin
             </div>
         }
+
     }
       
 <footer class="footer">

@@ -31,7 +31,7 @@ namespace MAC.Controllers
             if (usuario == null)
             {
 
-                ModelState.AddModelError("", "Usuario o contraseña incorrectos");
+                ViewBag.ErrorLogin = "Usuario o contraseña incorrectos.";
                 return View();
 
             }

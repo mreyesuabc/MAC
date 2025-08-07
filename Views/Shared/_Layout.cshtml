@@ -1,7 +1,10 @@
 ﻿@{
     var nombreCompleto = Context.Session.GetString("NombreCompleto");
     var roles = Context.Session.GetString("Roles");
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,6 +41,54 @@
             .header-right span {
                 display: block;
             }
+
+        aside {
+            width: 285.75px;
+            min-width: 285.75px;
+            max-width: 285.75px;
+            background-color: whitesmoke;
+            padding: 5px;
+            height: calc(100vh - 100px);
+            box-sizing: border-box;
+            border-right: 1px solid #ccc; /* Borde sutil a la derecha */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* sombra lateral */
+        }
+        aside ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+        }
+        a.menu_parent {
+            color: #71798f;
+            background: #FFFFFF;
+            padding: 5px;
+            display: block;
+            border-radius: 5px;
+        }
+
+        a.menu_activo {
+            color: #71798f;
+            background: #EEEEEE;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        a.menu_parent, a.menu_activo {
+            display: flex;
+            align-items: center;
+            height: 44px;
+            padding: 0 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #71798f;
+            white-space: nowrap; /* evita que el texto se divida en varias líneas */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            border-bottom: 1px solid #ddd; /* línea sutil entre opciones */
+        }
 
         nav {
             width: 200px;
@@ -94,15 +145,34 @@
 
     <!-- Menú lateral + contenido -->
     <div class="layout-container">
-        <nav>
+        <aside>
             <ul>
-                <li><a asp-controller="Menu" asp-action="Index"><span class="menu-icon fa fa-home"></span> Inicio</a></li>
-                <li><a asp-controller="Usuario" asp-action="MiPerfil"><span class="menu-icon fa fa-cog"></span> Mi Perfil</a></li>
-                <li><a asp-controller="Usuario" asp-action="Usuarios"><span class="menu-icon fa fa-user"></span> Usuarios del Sistema</a></li>
-                <li><a asp-controller="Dashboard" asp-action="Index"><span class="menu-icon fa fa-bar-chart"></span> Ver Dashboard</a></li>
+                <li>
+                    <a class="@(currentController == "Menu" && currentAction == "Index" ? "menu_activo" : "menu_parent")"
+                       asp-controller="Menu" asp-action="Index">
+                        <span class="menu-icon fa fa-home"></span> Inicio
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentController == "Usuario" && currentAction == "MiPerfil" ? "menu_activo" : "menu_parent")"
+                       asp-controller="Usuario" asp-action="MiPerfil">
+                        <span class="menu-icon fa fa-cog"></span> Mi Perfil
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentController == "Usuario" && currentAction == "Usuarios" ? "menu_activo" : "menu_parent")"
+                       asp-controller="Usuario" asp-action="Usuarios">
+                        <span class="menu-icon fa fa-user"></span> Usuarios del Sistema
+                    </a>
+                </li>
+                <li>
+                    <a class="@(currentController == "Dashboard" && currentAction == "Index" ? "menu_activo" : "menu_parent")"
+                       asp-controller="Dashboard" asp-action="Index">
+                        <span class="menu-icon fa fa-bar-chart"></span> Ver Dashboard
+                    </a>
+                </li>
             </ul>           
-        </nav>
-
+        </aside>
         <main>
             @RenderBody()
             @RenderSection("Scripts", required: false)
@@ -117,4 +187,4 @@
     <script src="~/js/site.js"></script>  
     <script src="https://code.jquery.com/jquery-3.cript"></script>
     </body>
-</html>
+</html> 
