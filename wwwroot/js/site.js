@@ -19,3 +19,36 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 });
+// site.js
+
+function mostrarMensajeResultado(tipo, mensaje) {
+    const mensajeDiv = document.getElementById("mensajeResultado");
+
+    if (!mensajeDiv) return;
+
+    // Limpiar clases anteriores
+    mensajeDiv.className = "alert"; // Clase base
+
+    // Asignar clase según el tipo
+    switch (tipo) {
+        case "success":
+            mensajeDiv.classList.add("alert-success");
+            break;
+        case "error":
+        case "danger":
+            mensajeDiv.classList.add("alert-danger");
+            break;
+        default:
+            mensajeDiv.classList.add("alert-info");
+            break;
+    }
+
+    // Mostrar el mensaje
+    mensajeDiv.textContent = mensaje;
+    mensajeDiv.style.display = "block";
+
+    // Ocultar después de 2 segundos
+    setTimeout(() => {
+        mensajeDiv.style.display = "none";
+    }, 2000);
+}

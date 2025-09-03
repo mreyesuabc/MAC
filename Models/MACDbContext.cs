@@ -16,6 +16,7 @@ namespace MAC.Models
         public DbSet<RolProceso> RolProcesos { get; set; }
         public DbSet<UsuarioProceso> UsuariosProceso { get; set; }
         public DbSet<UsuarioRol> UsuariosRol { get; set; }
+        public DbSet<Municipio> Municipios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

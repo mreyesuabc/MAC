@@ -78,6 +78,7 @@
             </div>
         </main>
     </div>
+    <div id="mensajeResultado" class="alert alert-info" style="display:none;"></div>
 
     <script>
          function cambiarPswd() {
@@ -94,11 +95,19 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.mensaje);
-            });
-        }
-    </script>
+                const mensajeDiv = document.getElementById("mensajeResultado");
+                mensajeDiv.textContent = data.mensaje;
+                mensajeDiv.style.display = "block";
 
+            // Ocultar el mensaje después de 2 segundos
+            setTimeout(() => {
+                mensajeDiv.style.display = "none";
+            }, 2000);
+
+        });
+
+        }
+    </script>    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
 </body>

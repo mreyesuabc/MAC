@@ -1,6 +1,9 @@
-﻿using MAC.Models; 
+﻿using AspNetCoreGeneratedDocument;
+using MAC.Models;
+using MAC.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
@@ -30,6 +33,9 @@ public class UsuarioController : Controller
             return RedirectToAction("Index", "Login");
         }
 
+        ViewBag.CurrentController = "Usuario";
+        ViewBag.CurrentAction = "MiPerfil";
+
         return View(usuario); // Pasa el modelo a la vista
     }
 
@@ -37,8 +43,12 @@ public class UsuarioController : Controller
     public IActionResult Usuarios()
     {
         var listaUsuarios = _context.Usuarios.ToList();
+        ViewBag.CurrentController = "Usuario";
+        ViewBag.CurrentAction = "Usuarios"; // o el nombre de la acción que estás usando
         return View(listaUsuarios);
     }
+
+
     [HttpPost]
     public async Task<IActionResult> CambiarPassword([FromBody] CambioPswVm model)
     {
@@ -66,17 +76,39 @@ public class UsuarioController : Controller
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
             TempData["Mensaje"] = "Usuario registrado correctamente.";
+            ViewBag.CurrentController = "Usuario";
+            ViewBag.CurrentAction = "Usuarios";
             return RedirectToAction("Index");
         }
 
         var errores = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
         TempData["Errores"] = errores;
+        ViewBag.CurrentController = "Usuario";
+        ViewBag.CurrentAction = "Usuarios";
         return RedirectToAction("Index");
     }
+    [HttpPost]
+    public async Task<IActionResult> Eliminar(int id)
+    {
+        var usuario = await _context.Usuarios.FindAsync(id);
+        if (usuario == null)
+        {
+            return Json(new { success = false, mensaje = "Usuario no encontrado." });
+        }
+
+        _context.Usuarios.Remove(usuario);
+        await _context.SaveChangesAsync();
+
+        return Json(new { success = true, mensaje = "El usuario ha sido eliminado correctamente." });
+    }
+
+
 
     public IActionResult Index()
     {
         var usuarios = _context.Usuarios.ToList();
+        ViewBag.CurrentController = "Usuario";
+        ViewBag.CurrentAction = "Usuarios";
         return View("Usuarios",usuarios);
     }
 

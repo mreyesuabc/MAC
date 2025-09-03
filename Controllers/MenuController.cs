@@ -6,6 +6,8 @@ namespace MAC.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.CurrentController = "Menu";
+            ViewBag.CurrentAction = "Index";
             return View();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MAC.Models
@@ -17,7 +18,7 @@ namespace MAC.Models
         public string rfc { get; set; } 
         public string homoclave { get; set; } 
         public int municipio { get; set; }
-
+       
 
 
     }

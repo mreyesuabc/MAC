@@ -1,8 +1,19 @@
-﻿@{
+﻿@using System.Text.Json
+@using MAC.Models.ViewModels
+@{
+    var procesosJson = Context.Session.GetString("ProcesosPermitidos");
+    var procesos = JsonSerializer.Deserialize<List<ProcesoViewModel>>(procesosJson ?? "[]");
+
+    var padres = procesos
+        .Where(p => string.IsNullOrWhiteSpace(p.padreId))
+        .OrderBy(p => p.orden)
+        .ToList();
     var nombreCompleto = Context.Session.GetString("NombreCompleto");
     var roles = Context.Session.GetString("Roles");
-    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
-    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    // var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    // var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var currentController = ViewBag.CurrentController as string ?? "";
+    var currentAction = ViewBag.CurrentAction as string ?? "";
 }
 
 <!DOCTYPE html>
@@ -58,6 +69,12 @@
                 padding: 0;
                 margin: 0;
         }
+
+        aside ul ul {
+               padding-left: 20px;
+               margin-top: 5px;
+        }
+
         a.menu_parent {
             color: #71798f;
             background: #FFFFFF;
@@ -89,6 +106,30 @@
             transition: background-color 0.5s ease, color 0.5s ease;
             border-bottom: 1px solid #ddd; /* línea sutil entre opciones */
         }
+
+        .menu-padre > a {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .submenu {
+            padding-left: 15px;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .fa-chevron-down.rotated {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+
+        .rotated {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+
 
         nav {
             width: 200px;
@@ -125,6 +166,11 @@
             text-align: center;
             padding: 10px;
         }
+
+        .invisible {
+            visibility: hidden;
+        }
+
     </style>
 </head>
 <body>
@@ -147,32 +193,67 @@
     <div class="layout-container">
         <aside>
             <ul>
-                <li>
-                    <a class="@(currentController == "Menu" && currentAction == "Index" ? "menu_activo" : "menu_parent")"
-                       asp-controller="Menu" asp-action="Index">
-                        <span class="menu-icon fa fa-home"></span> Inicio
-                    </a>
-                </li>
-                <li>
-                    <a class="@(currentController == "Usuario" && currentAction == "MiPerfil" ? "menu_activo" : "menu_parent")"
-                       asp-controller="Usuario" asp-action="MiPerfil">
-                        <span class="menu-icon fa fa-cog"></span> Mi Perfil
-                    </a>
-                </li>
-                <li>
-                    <a class="@(currentController == "Usuario" && currentAction == "Usuarios" ? "menu_activo" : "menu_parent")"
-                       asp-controller="Usuario" asp-action="Usuarios">
-                        <span class="menu-icon fa fa-user"></span> Usuarios del Sistema
-                    </a>
-                </li>
-                <li>
-                    <a class="@(currentController == "Dashboard" && currentAction == "Index" ? "menu_activo" : "menu_parent")"
-                       asp-controller="Dashboard" asp-action="Index">
-                        <span class="menu-icon fa fa-bar-chart"></span> Ver Dashboard
-                    </a>
-                </li>
-            </ul>           
+                @foreach (var padre in padres)
+                {
+                    var padreId = padre.Id;
+                    var hijos = procesos.Where(h => h.padreId == padreId.ToString())
+                    .OrderBy(h => int.Parse(h.orden.ToString()));
+
+                    var controlador = padre.controlador.ToString();
+                    var accion = padre.accion.ToString();
+                    var icono = padre.icono.ToString();
+                    var descr = padre.descr.ToString();
+                    var esActivo = currentController == controlador && currentAction == accion;
+                    var tieneHijoActivo = hijos.Any(h =>
+                    string.Equals(currentController, h.controlador.ToString(), StringComparison.OrdinalIgnoreCase) &&
+                    string.Equals(currentAction, h.accion.ToString(), StringComparison.OrdinalIgnoreCase)
+                    );
+
+                    var esPadreActivo = esActivo || tieneHijoActivo;
+
+                    <li class="menu-padre">
+                        @if (hijos.Any())
+                        {
+                            <a href="javascript:void(0);" class="toggle-submenu @(esActivo ? "menu_activo" : "menu_parent")">
+                                <span class="menu-icon fa @icono"></span> @descr
+                                <i class="fa fa-chevron-down ms-auto @(tieneHijoActivo ? "rotated" : "")"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="@controlador" asp-action="@accion" class="@(esActivo ? "menu_activo" : "menu_parent")">
+                                <span class="menu-icon fa @icono"></span> @descr
+                                <i class="fa fa-chevron-down ms-auto invisible"></i> <!-- ícono invisible para mantener alineación -->
+                            </a>
+                        }
+
+                        @if (hijos.Any())
+                        {
+                            <ul class="submenu" style="display:@(tieneHijoActivo ? "block" : "none");">
+
+                                 @foreach (var hijo in hijos)
+                                  {
+                                    var hControlador = hijo.controlador.ToString();
+                                    var hAccion = hijo.accion.ToString();
+                                    var hIcono = hijo.icono.ToString();
+                                    var hDescr = hijo.descr.ToString();
+                                    var esHijoActivo = string.Equals(currentController, hControlador, StringComparison.OrdinalIgnoreCase)
+                                    && string.Equals(currentAction, hAccion, StringComparison.OrdinalIgnoreCase);
+                                         <li>
+                                            <a class="@(esHijoActivo ? "menu_activo" : "menu_parent")"
+                                               asp-controller="@hControlador" asp-action="@hAccion">
+                                                <span class="menu-icon fa @hIcono"></span> @hDescr
+                                            </a>
+                                        </li>
+                                    }
+
+                            </ul>
+                        }
+                    </li>
+                }
+            </ul>
         </aside>
+
         <main>
             @RenderBody()
             @RenderSection("Scripts", required: false)
@@ -186,5 +267,23 @@
     </footer>
     <script src="~/js/site.js"></script>  
     <script src="https://code.jquery.com/jquery-3.cript"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.toggle-submenu').forEach(function (toggle) {
+                const chevron = toggle.querySelector('.fa-chevron-down');
+                const submenu = toggle.nextElementSibling;
+
+                if (chevron && submenu && submenu.classList.contains('submenu')) {
+                    chevron.addEventListener('click', function (event) {
+                        event.stopPropagation();
+                        const isVisible = submenu.style.display === 'block';
+                        submenu.style.display = isVisible ? 'none' : 'block';
+                        chevron.classList.toggle('rotated', !isVisible);
+                    });
+                }
+            });
+        });
+    </script>
+
     </body>
 </html> 
