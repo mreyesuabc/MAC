@@ -38,6 +38,12 @@ namespace MAC.Models
 
             modelBuilder.Entity<UsuarioProceso>().ToTable("usuarioproceso");
 
+
+            modelBuilder.Entity<Usuario>().HasOne(u => u.mpoInfo)
+                        .WithMany()
+                        .HasForeignKey(u => u.municipio);
+
+
             // Puedes agregar más configuraciones aquí si es necesario
         }
     }

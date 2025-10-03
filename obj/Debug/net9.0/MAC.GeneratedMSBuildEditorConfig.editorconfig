@@ -36,6 +36,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/SISTEMAS/VARIOS/MAC/Views/Rol/IndexRol.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXEluZGV4Um9sLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/SISTEMAS/VARIOS/MAC/Views/Rol/_AddRol.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXF9BZGRSb2wuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/SISTEMAS/VARIOS/MAC/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,6 +62,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/SISTEMAS/VARIOS/MAC/Views/Usuario/_AddUsr.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xfQWRkVXNyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/SISTEMAS/VARIOS/MAC/Views/Usuario/_EditarUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xfRWRpdGFyVXN1YXJpby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/SISTEMAS/VARIOS/MAC/Views/Usuario/_EditUsr.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xfRWRpdFVzci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/SISTEMAS/VARIOS/MAC/Views/_ViewImports.cshtml]

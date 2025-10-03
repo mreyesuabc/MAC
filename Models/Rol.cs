@@ -9,5 +9,6 @@ namespace MAC.Models
         [Key]
         public int Id { get; set; }
         public string descr { get; set; } = string.Empty;
+        public int activo { get; set; }
     }
 }

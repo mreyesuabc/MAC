@@ -37,21 +37,22 @@ namespace MAC.Controllers
 
             }
 
-            // Obtener roles del usuario
-            var roles = (from ur in _context.UsuariosRol
-                         join r in _context.Rol on ur.RolId equals r.Id
-                         where ur.UsuarioId == usuario.id
+
+            // Obtener roles activos del usuario
+            var roles = (from ur in _context.Usuarios
+                         join r in _context.Rol on ur.rol equals r.Id
+                         where ur.id == usuario.id && r.activo == 1
                          select r).ToList();
 
 
 
-            // Obtener procesos permitidos por los roles del usuario
+            // Obtener procesos permitidos por el rol del usuario
             var procesos = (from rp in _context.RolProcesos
                             join p in _context.Procesos on rp.ProcesoId equals p.Id
-                            where roles.Select(r => r.Id).Contains(rp.RolId)
-                            && p.activo == 1
+                            where rp.RolId == usuario.rol && p.activo == 1
                             select new
-                            {   p.Id,
+                            {
+                                p.Id,
                                 p.descr,
                                 p.controlador,
                                 p.accion,
@@ -60,6 +61,24 @@ namespace MAC.Controllers
                                 p.activo,
                                 padreId = p.padreId ?? ""
                             }).Distinct().ToList();
+
+
+
+            //// Obtener procesos permitidos por los roles del usuario
+            //var procesos = (from rp in _context.RolProcesos
+            //                join p in _context.Procesos on rp.ProcesoId equals p.Id
+            //                where roles.Select(r => r.Id).Contains(rp.RolId)
+            //                && p.activo == 1
+            //                select new
+            //                {   p.Id,
+            //                    p.descr,
+            //                    p.controlador,
+            //                    p.accion,
+            //                    p.icono,
+            //                    p.orden,
+            //                    p.activo,
+            //                    padreId = p.padreId ?? ""
+            //                }).Distinct().ToList();
 
             // Guardar en sesión
             HttpContext.Session.SetString("NombreCompleto", usuario.nombre + ' ' + usuario.appaterno + ' ' + usuario.apmaterno);

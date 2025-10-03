@@ -18,6 +18,9 @@ namespace MAC.Models
         public string rfc { get; set; } 
         public string homoclave { get; set; } 
         public int municipio { get; set; }
+        public Municipio mpoInfo {  get; set; }
+
+        public int rol {  get; set; }
        
 
 

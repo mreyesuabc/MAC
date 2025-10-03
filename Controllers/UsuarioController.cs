@@ -4,6 +4,7 @@ using MAC.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
@@ -26,8 +27,9 @@ public class UsuarioController : Controller
             return RedirectToAction("Index", "Login");
         }
 
-        var usuario = _context.Usuarios.FirstOrDefault(u => u.usuarioapp == usuarioApp);
-
+       var usuario = _context.Usuarios
+            .Include(u => u.mpoInfo)
+            .FirstOrDefault(u => u.usuarioapp == usuarioApp);
         if (usuario == null)
         {
             return RedirectToAction("Index", "Login");
@@ -42,10 +44,40 @@ public class UsuarioController : Controller
     // Acción para mostrar la lista de usuarios del sistema
     public IActionResult Usuarios()
     {
-        var listaUsuarios = _context.Usuarios.ToList();
+        var listaUsuarios = _context.Usuarios
+            .Include(u => u.mpoInfo).ToList(); 
         ViewBag.CurrentController = "Usuario";
-        ViewBag.CurrentAction = "Usuarios"; // o el nombre de la acción que estás usando
+        ViewBag.CurrentAction = "Usuarios";
         return View(listaUsuarios);
+    }
+    public IActionResult EditarUsuarioParcial(int id)
+    {
+        var usuario = _context.Usuarios.FirstOrDefault(u => u.id == id);
+        if (usuario == null)
+        {
+            return NotFound();
+        }
+        return PartialView("_EditarUsuario", usuario);
+    }
+
+
+[HttpPost]
+public IActionResult GuardarCambiosUsuario(Usuario usuario)
+    {
+        var usuarioDb = _context.Usuarios.FirstOrDefault(u => u.id == usuario.id);
+        if (usuarioDb == null)
+        {
+            return NotFound();
+        }
+
+        usuarioDb.correo = usuario.correo;
+        usuarioDb.rfc = usuario.rfc;
+        usuarioDb.homoclave = usuario.homoclave;
+        usuarioDb.municipio = usuario.municipio;
+
+        _context.SaveChanges();
+
+        return Ok();
     }
 
 

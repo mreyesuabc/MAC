@@ -58,6 +58,7 @@
                     <th>RFC</th>
                     <th>Homoclave</th>
                     <th>Correo</th>
+                    <th>Municipio</th>
                     
                 </tr>
             </thead>
@@ -82,12 +83,17 @@
                         <td>@usuario.apmaterno</td>
                         <td>@usuario.rfc</td>
                         <td>@usuario.homoclave</td>
-                        <td>@usuario.correo</td>                        
+                        <td>@usuario.correo</td>
+                        <td>@usuario.mpoInfo.descr</td>
+                        
                     </tr>
                 }
             </tbody>
         </table>
     </main>
+
+    <!-- Contenedor para cargar el modal de edición -->
+    <div id="modalContainer"></div>
 
     @Html.Partial("_AddUsr")
     <script>
@@ -97,9 +103,30 @@
             modal.show();
             setTimeout();
         }
-
         function editarUsuario(id) {
-            window.location.href = '/Usuario/Editar/' + id;
+            alert("entre a editar usuario");
+            $.ajax({
+                url: '/Usuario/EditarUsuarioParcial?id=' + id,
+                type: 'GET',
+                success: function (data) {
+                    $('#modalContainer').html(data);
+                      const modalElement = document.getElementById("modalEditarUsuario");
+                      const modal = new bootstrap.Modal(modalElement);
+                      modal.show();                    
+                }
+            });
+        }
+       function guardarCambiosUsuario() {
+            var formData = $('#formEditarUsuario').serialize();
+            $.ajax({
+                url: '/Usuario/GuardarCambiosUsuario',
+                type: 'POST',
+                data: formData,
+                success: function () {
+                    $('#modalContainer .modal').modal('hide');
+                    location.reload(); // o actualizar solo la tabla
+                }
+            });
         }
 
         function reiniciarPassword(id) {
@@ -121,7 +148,7 @@
                     if (data.success) {
                         mostrarMensaje(data.mensaje, true);
                         setTimeout(() => {
-                            window.location.href = '/Usuario/Index';
+                            window.location.href = '/Usuario/Usuarios';
                         }, 1500);
                     } else {
                         mostrarMensaje(data.mensaje, false);

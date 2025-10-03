@@ -1,0 +1,26 @@
+﻿<div class="modal" id="myModal" aria-hidden="true">
+    <div class="modal-content">
+        <form asp-controller="Rol" asp-action="AddRol" method="post">
+            <div class="row">
+                <div class="col-4">
+                    <span class="text-danger">*</span><span class="fw-bold">Descripción del Rol </span>
+                    <input type="text" id="descr" name="descr" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="col-2">
+                    <span class="text-danger">*</span><span class="fw-bold">Activo </span>
+                    <input type="checkbox" id="activo" name="activo" value="1" checked class="form-check-input" />
+                </div>
+                
+
+                <br>
+            </div>
+            <br><br>
+            <div class="form-group col-sm-4 text-right" style="align-items: end;">
+                <ul class="list-inline text-right">
+                    <li><button class="btn btn-block btn-sm btn-primary" style="width: 200px; text-align: center;" type="submit" id="btnGuardar"><span class="fa fa-check"></span>Guardar Cambios</button></li>
+                    <li><button class="btn btn-sm btn-warning" style="width: 200px; text-align: center;" type="button" id="btnCerrar" onclick="closeModal()"><span class="fa fa-times"></span>Cerrar</button></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
