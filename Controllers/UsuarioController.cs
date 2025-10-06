@@ -133,16 +133,6 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
 
         return Json(new { success = true, mensaje = "El usuario ha sido eliminado correctamente." });
     }
-
-
-
-    public IActionResult Index()
-    {
-        var usuarios = _context.Usuarios.ToList();
-        ViewBag.CurrentController = "Usuario";
-        ViewBag.CurrentAction = "Usuarios";
-        return View("Usuarios",usuarios);
-    }
-
+    
 
 }

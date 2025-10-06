@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MAC.Models.RolProceso>
+@{
+    ViewBag.Title = "Procesos Asignados a Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
+    var roles = ViewBag.Roles as string ?? "";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+</head>
+<body>
+
+    <!-- Main content -->
+    <main class="col-md-10 p-4">
+        <div class="form-group col-sm-12 text-right">
+            <ul class="list-inline text-right">
+                <li>
+                    <button class="btn btn-outline-secondary btn-sm" style="width: 200px;" type="button" id="btnAgregar" onclick="openModal()">
+                        <span class="fa fa-plus-circle text-primary"></span> Agregar
+                    </button>
+                </li>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+
+        <h2>Lista de Procesos</h2>
+        @if (TempData["Mensaje"] != null)
+        {
+            <div id="mensajeExito" class="alert alert-success">@TempData["Mensaje"]</div>
+        }
+
+        @if (TempData["Errores"] != null)
+        {
+            var errores = TempData["Errores"] as List<string>;
+            <div id="mensajeError" class="alert alert-danger">
+                <ul>
+                    @foreach (var error in errores)
+                    {
+                        <li>@error</li>
+                    }
+                </ul>
+            </div>
+        }
+        <table class="table table-striped" style="border:thin" id="tablaConsulta">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>Rol</th>
+                    <th>Proceso</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rolProceso in Model)
+                {
+                    <tr>
+                        <td>
+                            <button class="btn btn-sm " title="Editar" onclick="editarUsuario('@rolProceso.RolId')">
+                                <i class="fa fa-pencil" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
+                            </button>
+                        </td>
+                        <td>@rolProceso.RolId</td>
+                        <td>@rolProceso.ProcesoId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
