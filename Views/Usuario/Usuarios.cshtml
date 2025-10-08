@@ -5,7 +5,39 @@
     var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
     var roles = ViewBag.Roles as string ?? "";
 }
-
+@if (TempData["Mensaje"] != null)
+{
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastMensaje" class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @TempData["Mensaje"]
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData["Errores"] != null && (TempData["Errores"] as List<string>)?.Any() == true)
+{
+    var errores = TempData["Errores"] as List<string> ?? new List<string>();
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastErrores" class="toast text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <strong>Errores al guardar:</strong>
+                    <ul class="mb-0">
+                        @foreach (var error in errores)
+                        {
+                            <li>@error</li>
+                        }
+                    </ul>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +45,7 @@
 <body>
 
     <!-- Main content -->
-    <main class="col-md-10 p-4">
+    <main class="col-md-12 p-4">
         <div class="form-group col-sm-12 text-right">
             <ul class="list-inline text-right">
                 <li>
@@ -27,24 +59,7 @@
             </ul>
         </div>
 
-        <h2>Lista de Usuarios</h2>
-        @if (TempData["Mensaje"] != null)
-        {
-            <div id="mensajeExito" class="alert alert-success">@TempData["Mensaje"]</div>
-        }
-
-        @if (TempData["Errores"] != null)
-        {
-            var errores = TempData["Errores"] as List<string>;
-            <div id="mensajeError" class="alert alert-danger">
-                <ul>
-                    @foreach (var error in errores)
-                    {
-                        <li>@error</li>
-                    }
-                </ul>
-            </div>
-        }
+        <h2>Lista de Usuarios</h2>       
         <table class="table table-striped" style="border:thin" id="tablaConsulta">
             <thead>
                 <tr>
@@ -57,6 +72,7 @@
                     <th>Homoclave</th>
                     <th>Correo</th>
                     <th>Municipio</th>
+                    <th>Rol de Usuario</th>
                     
                 </tr>
             </thead>
@@ -83,6 +99,7 @@
                         <td>@usuario.homoclave</td>
                         <td>@usuario.correo</td>
                         <td>@usuario.mpoInfo.descr</td>
+                        <td>@usuario.rolInfo.descr</td>
                         
                     </tr>
                 }
@@ -92,8 +109,7 @@
 
     <!-- Contenedor para cargar el modal de edición -->
     <div id="modalContainer"></div>
-
-    @Html.Partial("_AddUsr")
+    @await Html.PartialAsync("_AddUsr", (MAC.Models.ViewModels.UsuarioViewModel)ViewBag.ViewModelUsuario)
     <script>
         function openModal() {
             const modalElement = document.getElementById("myModal");
@@ -132,47 +148,39 @@
                 window.location.href = '/Usuario/ReiniciarPassword/' + id;
             }
         }
-
         function eliminarUsuario(id) {
-            if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
-                fetch('/Usuario/Eliminar/' + id, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        mostrarMensaje(data.mensaje, true);
-                        setTimeout(() => {
-                            window.location.href = '/Usuario/Usuarios';
-                        }, 1500);
-                    } else {
-                        mostrarMensaje(data.mensaje, false);
-                    }
-                })
-                .catch(error => {
-                    mostrarMensaje("Error al eliminar el usuario.", false);
-                });
-            }
-        }
-        function mostrarMensaje(mensaje, exito) {
-            const div = document.getElementById("mensajeExito");
-            div.className = `alert ${exito ? 'alert-success' : 'alert-danger'}`;
-            div.textContent = mensaje;
-            div.style.display = "block";
-        }
+            if (confirm("¿Estás segura de que deseas eliminar este usuario?")) {
+                const form = document.createElement("form");
+                form.method = "post";
+                form.action = "/Usuario/Eliminar";
 
-        setTimeout(function () {
-            const mensajeExito = document.getElementById("mensajeExito");
-            const mensajeError = document.getElementById("mensajeError");
-           
-            if (mensajeExito) mensajeExito.style.display = "none";
-            if (mensajeError) mensajeError.style.display = "none";
-           
-        }, 2000);
+                const input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "id";
+                input.value = id;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }        
     </script>
+    <script>
+        setTimeout(function () {
+            var toastSuccess = document.getElementById('toastMensaje');
+            if (toastSuccess) {
+                var toast = bootstrap.Toast.getOrCreateInstance(toastSuccess);
+                toast.hide();
+            }
+
+            var toastError = document.getElementById('toastErrores');
+            if (toastError) {
+                var toast = bootstrap.Toast.getOrCreateInstance(toastError);
+                toast.hide();
+            }
+        }, 5000); // se ocultan después de 5 segundos
+    </script>
+
 
 </body>
 </html>

@@ -45,9 +45,23 @@ public class UsuarioController : Controller
     public IActionResult Usuarios()
     {
         var listaUsuarios = _context.Usuarios
-            .Include(u => u.mpoInfo).ToList(); 
+            .Include(u => u.mpoInfo)
+            .Include(u => u.rolInfo)
+            .ToList();
+
+        var viewModel = new UsuarioViewModel
+        {
+            Municipios = _context.Municipios
+                .Select(m => new SelectListItem { Value = m.mpo.ToString(), Text = m.descr })
+                .ToList(),
+            Roles = _context.Rol
+                .Select(r => new SelectListItem { Value = r.Id.ToString(), Text = r.descr })
+                .ToList()
+        };
         ViewBag.CurrentController = "Usuario";
         ViewBag.CurrentAction = "Usuarios";
+        ViewBag.ViewModelUsuario = viewModel;
+
         return View(listaUsuarios);
     }
     public IActionResult EditarUsuarioParcial(int id)
@@ -101,38 +115,60 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
         return Json(new { mensaje = "Contraseña actualizada correctamente." });
     }
     [HttpPost]
-    public async Task<IActionResult> AddUsr(Usuario usuario)
+    public async Task<IActionResult> AddUsr(UsuarioViewModel modal)
     {
+        ModelState.Remove("Municipios");
+        ModelState.Remove("Roles");
         if (ModelState.IsValid)
         {
-            _context.Usuarios.Add(usuario);
+            var usr = new Usuario
+            {
+                usuarioapp = modal.UsuarioApp,
+                password = modal.Password,
+                correo = modal.Correo,
+                nombre = modal.Nombre,
+                appaterno = modal.ApPaterno,
+                apmaterno = modal.ApMaterno,
+                rfc = modal.RFC,
+                homoclave = modal.Homoclave,
+                municipio = modal.Municipio,
+                rol = modal.Rol
+            };
+
+            _context.Usuarios.Add(usr);
             await _context.SaveChangesAsync();
             TempData["Mensaje"] = "Usuario registrado correctamente.";
-            ViewBag.CurrentController = "Usuario";
-            ViewBag.CurrentAction = "Usuarios";
-            return RedirectToAction("Index");
+            return RedirectToAction("Usuarios");
         }
 
         var errores = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
         TempData["Errores"] = errores;
-        ViewBag.CurrentController = "Usuario";
-        ViewBag.CurrentAction = "Usuarios";
-        return RedirectToAction("Index");
+        return RedirectToAction("Usuarios");
     }
+
     [HttpPost]
     public async Task<IActionResult> Eliminar(int id)
     {
         var usuario = await _context.Usuarios.FindAsync(id);
+
         if (usuario == null)
         {
-            return Json(new { success = false, mensaje = "Usuario no encontrado." });
+            TempData["Errores"] = new List<string> { "Usuario no encontrado." };
+            return RedirectToAction("Usuarios");
         }
 
-        _context.Usuarios.Remove(usuario);
-        await _context.SaveChangesAsync();
+        try
+        {
+            _context.Usuarios.Remove(usuario);
+            await _context.SaveChangesAsync();
 
-        return Json(new { success = true, mensaje = "El usuario ha sido eliminado correctamente." });
+            TempData["Mensaje"] = $"El usuario '{usuario.usuarioapp}' ha sido eliminado correctamente.";
+            return RedirectToAction("Usuarios");
+        }
+        catch (Exception ex)
+        {
+            TempData["Errores"] = new List<string> { "Ocurrió un error al intentar eliminar el usuario.", ex.Message };
+            return RedirectToAction("Usuarios");
+        }
     }
-    
-
 }

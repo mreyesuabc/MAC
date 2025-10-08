@@ -1,66 +1,76 @@
-﻿<div class="modal" id="myModal" aria-hidden="true">
+﻿@model MAC.Models.ViewModels.UsuarioViewModel
+
+<div class="modal" id="myModal" aria-hidden="true">
     <div class="modal-content">
         <form asp-controller="Usuario" asp-action="AddUsr" method="post">
-            <div class="row">
+           <div class="row">
                 <div class="col-4">
                     <span class="text-danger">*</span><span class="fw-bold">Nombre</span>
-                    <input type="text" id="nombre" name="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input asp-for="Nombre" class="form-control" />
                 </div>
                 <div class="col-4">
-                    <span class="text-danger">*</span><span class="fw-bold">Ap. Paterno </span>
-                    <input type="text" id="apPaterno" name="apPaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <span class="text-danger">*</span><span class="fw-bold">Ap. Paterno</span>
+                    <input asp-for="ApPaterno" class="form-control" />
                 </div>
                 <div class="col-4">
                     <span class="fw-bold">Ap. Materno</span>
-                    <input type="text" id="apMaterno" name="apMaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input asp-for="ApMaterno" class="form-control" />
                 </div>
                 <div class="col-4">
-                    <span class="text-danger">*</span><span class="fw-bold">Usuario App </span>
-                    <input type="text" id="usuarioApp" name="usuarioApp" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <span class="text-danger">*</span><span class="fw-bold">Usuario App</span>
+                    <input asp-for="UsuarioApp" class="form-control" />
                 </div>
                 <div class="col-4">
-                    <span class="text-danger">*</span><span class="fw-bold">Correo </span>
-                    <input type="email" id="correo" name="correo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <span class="text-danger">*</span><span class="fw-bold">Correo</span>
+                    <input asp-for="Correo" type="email" class="form-control" />
                 </div>
                 <div class="col-2">
-                    <span class="text-danger">*</span><span class="fw-bold">RFC </span>
-                    <input type="text" id="rfc" name="rfc" class="form-control mayusculas" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <span class="text-danger">*</span><span class="fw-bold">RFC</span>
+                    <input asp-for="RFC" class="form-control mayusculas" />
                 </div>
                 <div class="col-2">
                     <span class="text-danger">*</span><span class="fw-bold">Homoclave</span>
-                    <input type="text" id="homoclave" name="homoclave" class="form-control mayusculas" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <input asp-for="Homoclave" class="form-control mayusculas" />
                 </div>
                 <div class="col-4">
-                    <span class="text-danger">*</span><span class="fw-bold">Municipio </span>
-                    <select id="municipio" name="municipio" class="form-select">
-                        <option value="1">Mexicali</option>
-                        <option value="2">Tijuana</option>
-                        <option value="3">Ensenada</option>
-                        <option value="4">Rosarito</option>
-                    </select>
+                    <span class="text-danger">*</span><span class="fw-bold">Municipio</span>
+                    <select asp-for="Municipio" asp-items="Model.Municipios" class="form-select"></select>
                 </div>
-                <div class="col-4" style="display:none;">
-                    <input type="text" id="password" name="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <div class="col-4">
+                    <span class="text-danger">*</span><span class="fw-bold">Rol de Usuario</span>
+                    <select asp-for="Rol" asp-items="Model.Roles" class="form-select"></select>
                 </div>
-                <br>
+                <input asp-for="Password" type="hidden" />
             </div>
-            <br><br>
+
+            <br /><br />
             <div class="form-group col-sm-4 text-right" style="align-items: end;">
                 <ul class="list-inline text-right">
-                    <li><button class="btn btn-block btn-sm btn-primary" style="width: 200px; text-align: center;" type="submit" id="btnGuardar"><span class="fa fa-check"></span>Guardar Cambios</button></li>
-                    <li><button class="btn btn-sm btn-warning" style="width: 200px; text-align: center;" type="button" id="btnCerrar" onclick="closeModal()"><span class="fa fa-times"></span>Cerrar</button></li>
+                    <li>
+                        <button class="btn btn-block btn-sm btn-primary" style="width: 200px; text-align: center;" type="submit" id="btnGuardar">
+                            <span class="fa fa-check"></span> Guardar Cambios
+                        </button>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-warning" style="width: 200px; text-align: center;" type="button" id="btnCerrar" onclick="closeModal()">
+                            <span class="fa fa-times"></span> Cerrar
+                        </button>
+                    </li>
                 </ul>
-            </div>            
+            </div>
         </form>
     </div>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const usuarioInput = document.getElementById("usuarioApp");
-        const passwordInput = document.getElementById("password");
+        const usuarioInput = document.getElementById("UsuarioApp");
+        const passwordInput = document.getElementById("Password");
 
-        usuarioInput.addEventListener("input", function () {
-            passwordInput.value = usuarioInput.value;
-        });
+        if (usuarioInput && passwordInput) {
+            usuarioInput.addEventListener("input", function () {
+                passwordInput.value = usuarioInput.value;
+            });
+        }
     });
 </script>

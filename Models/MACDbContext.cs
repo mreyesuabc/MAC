@@ -42,6 +42,9 @@ namespace MAC.Models
             modelBuilder.Entity<Usuario>().HasOne(u => u.mpoInfo)
                         .WithMany()
                         .HasForeignKey(u => u.municipio);
+            modelBuilder.Entity<Usuario>().HasOne(u => u.rolInfo)
+                       .WithMany()
+                       .HasForeignKey(u => u.rol);
 
 
             // Puedes agregar más configuraciones aquí si es necesario
