@@ -1,0 +1,34 @@
+﻿@* Views/Shared/_MensajesTempData.cshtml *@
+@if (TempData["Mensaje"] != null)
+{
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastMensaje" class="toast align-items-center text-bg-success border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    @TempData["Mensaje"]
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData["Errores"] != null && (TempData["Errores"] as List<string>)?.Any() == true)
+{
+    var errores = TempData["Errores"] as List<string> ?? new List<string>();
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toastErrores" class="toast text-bg-danger border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <strong>Errores al guardar:</strong>
+                    <ul class="mb-0">
+                        @foreach (var error in errores)
+                        {
+                            <li>@error</li>
+                        }
+                    </ul>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
