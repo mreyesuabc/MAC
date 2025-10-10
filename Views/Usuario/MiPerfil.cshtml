@@ -1,16 +1,10 @@
-﻿@model MAC.Models.Usuario
-
+﻿@model MAC.Models.ViewModels.PerfilUsuarioViewModel
 @{
     ViewBag.Title = "Mi Perfil";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var nombreCompleto = @ViewBag.NombreCompleto as string ?? "Usuario";
     var roles = @ViewBag.Roles as string ?? "";
 }
-<!DOCTYPE html>
-<html lang="es">
-<head>
-</head>
-<body>
     <div class="wrapper">
         <main class="content">
             <div class="flex-grow-1 p-3 bg-white">
@@ -19,35 +13,39 @@
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Nombre</span>
-                            <input type="text" id="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.nombre">
+                            <input type="text" id="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.nombre">
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Ap. Paterno </span>
-                            <input type="text" id="apPaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.appaterno">
+                            <input type="text" id="apPaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.appaterno">
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Ap. Materno</span>
-                            <input type="text" id="apMaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.apmaterno">
+                            <input type="text" id="apMaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.apmaterno">
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Usuario App </span>
-                            <input type="text" id="usuarioApp" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.usuarioapp">
+                            <input type="text" id="usuarioApp" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.usuarioapp">
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Correo </span>
-                            <input type="email" id="correo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.correo">
+                            <input type="email" id="correo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.correo">
                         </div>
                         <div class="col-12 col-md-2">
                             <span class="fw-bold">RFC </span>
-                            <input type="text" id="rfc" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.rfc">
+                            <input type="text" id="rfc" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.rfc">
                         </div>
                         <div class="col-12 col-md-2">
                             <span class="fw-bold">Homoclave</span>
-                            <input type="text" id="homoclave" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.homoclave">
+                            <input type="text" id="homoclave" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.homoclave">
                         </div>
                         <div class="col-12 col-md-2">
                             <span class="fw-bold">Municipio</span>
-                            <input type="text" id="txtMpo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.mpoInfo.descr">
+                            <input type="text" id="txtMpo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.mpoInfo.descr">
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <span class="fw-bold">Rol</span>
+                            <input type="text" id="txtRol" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.rolInfo.descr">
                         </div>
                     </div>
                 </form>
@@ -61,54 +59,23 @@
                     se le enviará un correo confirmando su nueva Contraseña de acceso."
                 </div>
             </div>
-            <div class="p-3 bg-white">
-                <div class="row">
-                    <div class="col-12 col-md-3">
-                        <span class="fw-bold">Contraseña Actual</span>
-                        <input id="txtPswActual" class="form-control" type="password">
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <span class="fw-bold">Contraseña Nueva</span>
-                        <input id="txtPswNvo" class="form-control" type="password">
-                    </div>
-                    <div class="col-12 mb-3">
-                        <button class="btn btn-primary" onclick="cambiarPswd()">Guardar Cambios</button>
-                    </div>
+            @using (Html.BeginForm("CambiarPassword", "Usuario", FormMethod.Post, new { @class = "row" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-12 col-md-3">
+                    <span class="fw-bold">Contraseña Actual</span>
+                    @Html.PasswordFor(m => m.CambioPassword.Actual, new { @class = "form-control", required = "required" })
                 </div>
-            </div>
+                <div class="col-12 col-md-3">
+                    <span class="fw-bold">Contraseña Nueva</span>
+                    @Html.PasswordFor(m => m.CambioPassword.Nueva, new { @class = "form-control", required = "required" })
+                </div>
+                <div class="col-12 mb-3">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            }
         </main>
-    </div>
-    <div id="mensajeResultado" class="alert alert-info" style="display:none;"></div>
-
-    <script>
-         function cambiarPswd() {
-            const actual = document.getElementById("txtPswActual").value;
-            const nueva = document.getElementById("txtPswNvo").value;
-
-            fetch('/Usuario/CambiarPassword', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
-                },
-                body: JSON.stringify({ actual, nueva })
-            })
-            .then(response => response.json())
-            .then(data => {
-                const mensajeDiv = document.getElementById("mensajeResultado");
-                mensajeDiv.textContent = data.mensaje;
-                mensajeDiv.style.display = "block";
-
-            // Ocultar el mensaje después de 2 segundos
-            setTimeout(() => {
-                mensajeDiv.style.display = "none";
-            }, 2000);
-
-        });
-
-        }
-    </script>    
+    </div>  
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
-</body>
-</html>

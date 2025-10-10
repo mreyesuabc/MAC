@@ -5,14 +5,7 @@
     var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
     var roles = ViewBag.Roles as string ?? "";
 }
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-</head>
-<body>
-
-    <!-- Main content -->
+<!-- Main content -->
     <main class="col-md-10 p-4">
         <div class="form-group col-sm-12 text-right">
             <ul class="list-inline text-right">
@@ -27,24 +20,7 @@
             </ul>
         </div>
 
-        <h2>Lista de Procesos</h2>
-        @if (TempData["Mensaje"] != null)
-        {
-            <div id="mensajeExito" class="alert alert-success">@TempData["Mensaje"]</div>
-        }
-
-        @if (TempData["Errores"] != null)
-        {
-            var errores = TempData["Errores"] as List<string>;
-            <div id="mensajeError" class="alert alert-danger">
-                <ul>
-                    @foreach (var error in errores)
-                    {
-                        <li>@error</li>
-                    }
-                </ul>
-            </div>
-        }
+        <h2>Lista de Procesos</h2>        
         <table class="table table-striped" style="border:thin" id="tablaConsulta">
             <thead>
                 <tr>
@@ -69,5 +45,3 @@
             </tbody>
         </table>
     </main>
-</body>
-</html>

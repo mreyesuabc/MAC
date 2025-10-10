@@ -28,23 +28,6 @@
         </div>
 
         <h2>Lista de Procesos</h2>
-        @if (TempData["Mensaje"] != null)
-        {
-            <div id="mensajeExito" class="alert alert-success">@TempData["Mensaje"]</div>
-        }
-
-        @if (TempData["Errores"] != null)
-        {
-            var errores = TempData["Errores"] as List<string>;
-            <div id="mensajeError" class="alert alert-danger">
-                <ul>
-                    @foreach (var error in errores)
-                    {
-                        <li>@error</li>
-                    }
-                </ul>
-            </div>
-        }
         <table class="table table-striped" style="border:thin" id="tablaConsulta">
             <thead>
                 <tr>

@@ -17,31 +17,30 @@ public class UsuarioController : Controller
     {
         _context = context;
     }
-
-    public IActionResult MiPerfil()
+    public async Task<IActionResult> MiPerfil()
     {
+
         var usuarioApp = HttpContext.Session.GetString("UsuarioApp");
-
-        if (string.IsNullOrEmpty(usuarioApp))
-        {
-            return RedirectToAction("Index", "Login");
-        }
-
-       var usuario = _context.Usuarios
+        var usuario = await _context.Usuarios
             .Include(u => u.mpoInfo)
-            .FirstOrDefault(u => u.usuarioapp == usuarioApp);
+            .Include(u => u.rolInfo)
+            .FirstOrDefaultAsync(u => u.usuarioapp == usuarioApp);
+
         if (usuario == null)
         {
+            TempData["Errores"] = new List<string> { "Usuario no encontrado." };
             return RedirectToAction("Index", "Login");
         }
 
+        var viewModel = new PerfilUsuarioViewModel
+        {
+            Usuario = usuario
+        };
         ViewBag.CurrentController = "Usuario";
         ViewBag.CurrentAction = "MiPerfil";
-
-        return View(usuario); // Pasa el modelo a la vista
+        return View(viewModel);
     }
-
-    // Acción para mostrar la lista de usuarios del sistema
+     // Acción para mostrar la lista de usuarios del sistema
     public IActionResult Usuarios()
     {
         var listaUsuarios = _context.Usuarios
@@ -93,26 +92,34 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
 
         return Ok();
     }
-
-
     [HttpPost]
-    public async Task<IActionResult> CambiarPassword([FromBody] CambioPswVm model)
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CambiarPassword(PerfilUsuarioViewModel model)
     {
         var usuarioId = HttpContext.Session.GetInt32("Id");
-
         var usuario = await _context.Usuarios.FindAsync(usuarioId);
 
         if (usuario == null)
-            return Json(new { mensaje = "Usuario no encontrado." });
+        {
+            TempData["Errores"] = "Usuario no encontrado.";
+            return RedirectToAction("MiPerfil");
+        }
 
-        if (usuario.password != model.Actual)
-            return Json(new { mensaje = "La contraseña actual es incorrecta." });
+        if (usuario.password == model.CambioPassword.Actual)
+        {
+            usuario.password = model.CambioPassword.Nueva;
 
-        usuario.password = model.Nueva; 
-        _context.Update(usuario);
-        await _context.SaveChangesAsync();
+            _context.Usuarios.Update(usuario);
+            await _context.SaveChangesAsync();
 
-        return Json(new { mensaje = "Contraseña actualizada correctamente." });
+            TempData["Mensaje"] = "Contraseña actualizada correctamente.";
+            return RedirectToAction("MiPerfil");
+        }
+        else
+        {
+            TempData["Errores"] = "Contraseña actual es incorrecta.";
+            return RedirectToAction("MiPerfil");
+        }
     }
     [HttpPost]
     public async Task<IActionResult> AddUsr(UsuarioViewModel modal)
@@ -140,9 +147,7 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
             TempData["Mensaje"] = "Usuario registrado correctamente.";
             return RedirectToAction("Usuarios");
         }
-
-        var errores = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-        TempData["Errores"] = errores;
+        TempData["Errores"] = "No fue posible agregar al usuario";
         return RedirectToAction("Usuarios");
     }
 
@@ -153,7 +158,7 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
 
         if (usuario == null)
         {
-            TempData["Errores"] = new List<string> { "Usuario no encontrado." };
+            TempData["Errores"] = "Usuario no encontrado.";
             return RedirectToAction("Usuarios");
         }
 
@@ -167,7 +172,7 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
         }
         catch (Exception ex)
         {
-            TempData["Errores"] = new List<string> { "Ocurrió un error al intentar eliminar el usuario.", ex.Message };
+            TempData["Errores"] ="Ocurrió un error al intentar eliminar el usuario."+ ex.Message;
             return RedirectToAction("Usuarios");
         }
     }

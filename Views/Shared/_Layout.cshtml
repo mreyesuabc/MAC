@@ -74,7 +74,6 @@
         a.menu_parent {
             color: #71798f;
             background: #FFFFFF;
-            padding: 5px;
             display: block;
             border-radius: 5px;
         }
@@ -82,7 +81,7 @@
         a.menu_activo {
             color: #71798f;
             background: #EEEEEE;
-            padding: 10px;
+            padding: 0px;
             display: block;
             border-radius: 5px;
             font-weight: bold;
@@ -92,7 +91,6 @@
             display: flex;
             align-items: center;
             height: 44px;
-            padding: 0 10px;
             border-radius: 5px;
             text-decoration: none;
             color: #71798f;
@@ -111,7 +109,6 @@
         }
 
         .submenu {
-            padding-left: 15px;
             margin-top: 5px;
             transition: all 0.3s ease;
         }
@@ -130,7 +127,7 @@
         nav {
             width: 200px;
             background-color:whitesmoke; /* #f0f0f0; */
-            padding: 20px;
+            padding: 0px;
             height: calc(100vh - 100px);
         }
 
@@ -139,14 +136,10 @@
                 padding: 0;
             }
 
-                nav ul li {
-                    margin-bottom: 10px;
-                }
-
-                    nav ul li a {
-                        text-decoration: none;
-                        color: #333;
-                    }
+         nav ul li a {
+             text-decoration: none;
+              color: #333;
+          }
 
         main {
             flex-grow: 1;
@@ -180,11 +173,9 @@
             <span>@nombreCompleto</span>
             <span>@roles</span>
             <a href="/Login" title="Cerrar Sesión" style="font-size:30px; color: white; margin-left: 10px;"> <i class="fa fa-power-off"></i></a>
-            
-
         </div>
     </header>
-
+    @Html.Partial("_MensajesTempData")
     <!-- Menú lateral + contenido -->
     <div class="layout-container">
         <aside>
@@ -285,9 +276,22 @@
             });
         });
     </script>
+    <script>
+        setTimeout(function () {
+            var toastSuccess = document.getElementById('toastMensaje');
+            if (toastSuccess) {
+                var toast = bootstrap.Toast.getOrCreateInstance(toastSuccess);
+                toast.hide();
+            }
 
+            var toastError = document.getElementById('toastErrores');
+            if (toastError) {
+                var toast = bootstrap.Toast.getOrCreateInstance(toastError);
+                toast.hide();
+            }
+        }, 3000); // se ocultan después de 3 segundos
+    </script>
     <!-- Renderiza los scripts específicos de cada vista -->
-    @RenderSection("Scripts", required: false)
-    @Html.Partial("_MensajesTempData")
+    @RenderSection("Scripts", required: false)   
     </body>
 </html> 

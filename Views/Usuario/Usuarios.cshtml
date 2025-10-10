@@ -5,13 +5,7 @@
     var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
     var roles = ViewBag.Roles as string ?? "";
 }
-<!DOCTYPE html>
-<html lang="es">
-<head>
-</head>
-<body>
-
-    <!-- Main content -->
+<!-- Main content -->
     <main class="col-md-12 p-4">
         <div class="form-group col-sm-12 text-right">
             <ul class="list-inline text-right">
@@ -131,23 +125,4 @@
                 form.submit();
             }
         }        
-    </script>
-    <script>
-        setTimeout(function () {
-            var toastSuccess = document.getElementById('toastMensaje');
-            if (toastSuccess) {
-                var toast = bootstrap.Toast.getOrCreateInstance(toastSuccess);
-                toast.hide();
-            }
-
-            var toastError = document.getElementById('toastErrores');
-            if (toastError) {
-                var toast = bootstrap.Toast.getOrCreateInstance(toastError);
-                toast.hide();
-            }
-        }, 5000); // se ocultan después de 5 segundos
-    </script>
-
-
-</body>
-</html>
+    </script>    
