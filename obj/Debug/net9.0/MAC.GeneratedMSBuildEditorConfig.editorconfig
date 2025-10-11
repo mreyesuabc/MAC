@@ -9,89 +9,89 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MAC
 build_property.RootNamespace = MAC
-build_property.ProjectDir = C:\SISTEMAS\VARIOS\MAC\
+build_property.ProjectDir = C:\Users\roman\OneDrive\Documentos\MICAELA\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\SISTEMAS\VARIOS\MAC
+build_property.MSBuildProjectDirectory = C:\Users\roman\OneDrive\Documentos\MICAELA
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Home/Index.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Home/Privacy.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Login/Index.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Menu/Index.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Menu/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVudVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Proceso/Index.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Proceso/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvY2Vzb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/RolProceso/Index.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/RolProceso/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sUHJvY2Vzb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Rol/IndexRol.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Rol/IndexRol.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXEluZGV4Um9sLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Rol/_AddRol.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Rol/_AddRol.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sXF9BZGRSb2wuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Shared/Error.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Shared/_MensajesTempData.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Shared/_MensajesTempData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9NZW5zYWplc1RlbXBEYXRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Usuario/MiPerfil.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Usuario/MiPerfil.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xNaVBlcmZpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Usuario/Usuarios.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Usuario/Usuarios.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xVc3Vhcmlvcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Usuario/_AddUsr.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Usuario/_AddUsr.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xfQWRkVXNyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Usuario/_EditarUsuario.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Usuario/_EditarUsuario.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xfRWRpdGFyVXN1YXJpby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Usuario/_EditUsr.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Usuario/_EditUsr.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xfRWRpdFVzci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/_ViewImports.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/_ViewStart.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/SISTEMAS/VARIOS/MAC/Views/Shared/_Layout.cshtml]
+[C:/Users/roman/OneDrive/Documentos/MICAELA/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-639m1ezz8j

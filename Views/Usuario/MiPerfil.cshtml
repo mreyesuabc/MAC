@@ -13,39 +13,39 @@
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Nombre</span>
-                            <input type="text" id="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.nombre">
+                            <input type="text" id="nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.nombre" readonly>
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Ap. Paterno </span>
-                            <input type="text" id="apPaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.appaterno">
+                            <input type="text" id="apPaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.appaterno" readonly>
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Ap. Materno</span>
-                            <input type="text" id="apMaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.apmaterno">
+                            <input type="text" id="apMaterno" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.apmaterno" readonly>
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Usuario App </span>
-                            <input type="text" id="usuarioApp" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.usuarioapp">
+                            <input type="text" id="usuarioApp" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.usuarioapp" readonly>
                         </div>
                         <div class="col-12 col-md-4">
                             <span class="fw-bold">Correo </span>
-                            <input type="email" id="correo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.correo">
+                            <input type="email" id="correo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.correo" readonly>
                         </div>
                         <div class="col-12 col-md-2">
                             <span class="fw-bold">RFC </span>
-                            <input type="text" id="rfc" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.rfc">
+                            <input type="text" id="rfc" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.rfc" readonly>
                         </div>
                         <div class="col-12 col-md-2">
                             <span class="fw-bold">Homoclave</span>
-                            <input type="text" id="homoclave" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.homoclave">
+                            <input type="text" id="homoclave" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.homoclave" readonly>
                         </div>
                         <div class="col-12 col-md-2">
                             <span class="fw-bold">Municipio</span>
-                            <input type="text" id="txtMpo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.mpoInfo.descr">
+                            <input type="text" id="txtMpo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.mpoInfo.descr" readonly>
                         </div>
                         <div class="col-12 col-md-2">
                             <span class="fw-bold">Rol</span>
-                            <input type="text" id="txtRol" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.rolInfo.descr">
+                            <input type="text" id="txtRol" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="@Model.Usuario.rolInfo.descr" readonly>
                         </div>
                     </div>
                 </form>
@@ -70,8 +70,9 @@
                 <div class="col-12 col-md-3">
                     <span class="fw-bold">Contraseña Nueva</span>
                     @Html.PasswordFor(m => m.CambioPassword.Nueva, new { @class = "form-control", required = "required" })
-                </div>
+               </div>
                 <div class="col-12 mb-3">
+                    <br>
                     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 </div>
             }
