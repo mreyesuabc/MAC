@@ -5,14 +5,28 @@
     var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
     var roles = ViewBag.Roles as string ?? "";
 }
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.activo-checkbox').on('change', function () {
+                var id = $(this).data('id');
+                var activo = $(this).is(':checked') ? 1 : 0;
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-</head>
-<body>
-
-    <!-- Main content -->
+                $.ajax({
+                    url: '/Proceso/ActualizarActivo',
+                    type: 'POST',
+                    data: { id: id, activo: activo },
+                    success: function () {
+                                           },
+                    error: function () {
+                        alert('Error al actualizar el estado');
+                    }
+                });
+            });
+        });
+    </script>
+}
+<!-- Main content -->
     <main class="col-md-10 p-4">
         <div class="form-group col-sm-12 text-right">
             <ul class="list-inline text-right">
@@ -56,7 +70,13 @@
                         <td>@proceso.accion</td>
                         <td><i class="@proceso.icono"></i> @proceso.icono</td>
                         <td>@proceso.orden</td>
-                        <td>@(proceso.activo == 1 ? "Sí" : "No")</td>
+                        <td>
+                        <input type="checkbox"
+                               class="activo-checkbox"
+                               data-id="@proceso.Id"
+                               @(proceso.activo == 1 ? "checked" : "") />
+                        </td>
+
                         <td>@proceso.padreId</td>
 
                     </tr>
@@ -64,5 +84,4 @@
             </tbody>
         </table>
     </main>
-</body>
-</html>
+   

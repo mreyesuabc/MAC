@@ -85,7 +85,20 @@ public class RolController : Controller
         ViewBag.CurrentAction = "IndexRol";
         return View("IndexRol", rol);
     }
+    [HttpPost]
+    public IActionResult ActualizarActivo(int id, int activo)
+    {
+        var rol = _context.Rol.FirstOrDefault(p => p.Id == id);
+        if (rol == null)
+        {
+            return NotFound();
+        }
 
+        rol.activo = activo;
+        _context.SaveChanges();
+
+        return Ok();
+    }
 
 }
 

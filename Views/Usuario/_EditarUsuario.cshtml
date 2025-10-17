@@ -40,9 +40,13 @@
                             <label>Homoclave</label>
                             <input type="text" class="form-control" asp-for="homoclave" />
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-4">
                             <label>Municipio</label>
-                            <input type="text" class="form-control" asp-for="municipio" />
+                            <select asp-for="municipio" asp-items="ViewBag.Municipios" class="form-select"></select>
+                        </div>
+                        <div class="col-4">
+                            <label>Rol de Usuario</label>
+                            <select asp-for="rol" asp-items="ViewBag.Roles" class="form-select"></select>
                         </div>
                     </div>
                 </form>

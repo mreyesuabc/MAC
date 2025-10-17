@@ -1,6 +1,7 @@
 ﻿using AspNetCoreGeneratedDocument;
 using MAC.Models;
 using MAC.Models.ViewModels;
+using MAC.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,7 +13,7 @@ using System.Xml.Linq;
 public class UsuarioController : Controller
 {
     private readonly MACDbContext _context;
-
+    
     public UsuarioController(MACDbContext context)
     {
         _context = context;
@@ -70,12 +71,19 @@ public class UsuarioController : Controller
         {
             return NotFound();
         }
+        ViewBag.Roles = _context.Rol
+                    .Select(r => new SelectListItem { Value = r.Id.ToString(), Text = r.descr })
+                    .ToList();
+
+        ViewBag.Municipios = _context.Municipios
+                        .Select(m => new SelectListItem { Value = m.mpo.ToString(), Text = m.descr })
+                        .ToList();
         return PartialView("_EditarUsuario", usuario);
     }
 
 
-[HttpPost]
-public IActionResult GuardarCambiosUsuario(Usuario usuario)
+    [HttpPost]
+    public IActionResult GuardarCambiosUsuario(Usuario usuario)
     {
         var usuarioDb = _context.Usuarios.FirstOrDefault(u => u.id == usuario.id);
         if (usuarioDb == null)
@@ -87,12 +95,20 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
         usuarioDb.rfc = usuario.rfc;
         usuarioDb.homoclave = usuario.homoclave;
         usuarioDb.municipio = usuario.municipio;
+        usuarioDb.rol = usuario.rol;
+        try
+        {
+            _context.SaveChanges();
+            TempData["Mensaje"] = "Se actualizó información correctamente.";
 
-        _context.SaveChanges();
-
+        }
+        catch (Exception ex)
+        {
+            TempData["Errores"] = "No fue posible actualizar la información del usuario."+ex;
+        }
         return Ok();
     }
-    [HttpPost]
+        [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CambiarPassword(PerfilUsuarioViewModel model)
     {
@@ -176,4 +192,25 @@ public IActionResult GuardarCambiosUsuario(Usuario usuario)
             return RedirectToAction("Usuarios");
         }
     }
+    [HttpGet]
+    public async Task<IActionResult> ReiniciarPassword(int id)
+    {
+        var usuario = await _context.Usuarios.FindAsync(id);
+        if (usuario == null)
+        {
+            TempData["Errores"] = "Usuario no encontrado.";
+            return RedirectToAction("Usuarios");
+        }
+
+        // Generar nueva contraseña
+        var nuevaPassword = usuario.usuarioapp;
+
+        // Actualizar la contraseña
+        usuario.password = nuevaPassword;
+        _context.Usuarios.Update(usuario);
+        await _context.SaveChangesAsync();
+        TempData["Mensaje"] = $"La contraseña del usuario '{usuario.usuarioapp}' fue reiniciada como su usuario de aplicación, puede entrar a su perfil a cambairla.";
+        return RedirectToAction("Usuarios");
+    }
+
 }

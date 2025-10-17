@@ -5,6 +5,27 @@
     var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
     var roles = ViewBag.Roles as string ?? "";
 }
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.activo-checkbox').on('change', function () {
+                var id = $(this).data('id');
+                var activo = $(this).is(':checked') ? 1 : 0;
+
+                $.ajax({
+                    url: '/Rol/ActualizarActivo',
+                    type: 'POST',
+                    data: { id: id, activo: activo },
+                    success: function () {
+                                           },
+                    error: function () {
+                        alert('Error al actualizar el estado');
+                    }
+                });
+            });
+        });
+    </script>
+}
     <!-- Main content -->
     <main class="col-md-10 p-4">
         <div class="form-group col-sm-12 text-right">
@@ -44,14 +65,10 @@
                         <td>@rol.Id</td>
                         <td>@rol.descr</td>
                         <td>
-                          @if (rol.activo==1)
-                            {
-                                <span style="color:green;">&#10004;</span> <!-- ✔ -->
-                            }
-                            else
-                            {
-                                <span style="color:red;">&#10008;</span> <!-- ✘ -->
-                            }
+                            <input type="checkbox"
+                                   class="activo-checkbox"
+                                   data-id="@rol.Id"
+                                   @(rol.activo == 1 ? "checked" : "") />
                         </td>
                     </tr>                 
                 }

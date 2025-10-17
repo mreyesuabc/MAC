@@ -79,8 +79,7 @@
             setTimeout();
         }
         function editarUsuario(id) {
-            alert("entre a editar usuario");
-            $.ajax({
+           $.ajax({
                 url: '/Usuario/EditarUsuarioParcial?id=' + id,
                 type: 'GET',
                 success: function (data) {

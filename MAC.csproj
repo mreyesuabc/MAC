@@ -7,8 +7,178 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="obj\Debug\net9.0\.NETCoreApp,Version=v9.0.AssemblyAttributes.cs" />
+    <Compile Include="obj\Debug\net9.0\MAC.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net9.0\MAC.GlobalUsings.g.cs" />
+    <Compile Include="obj\Debug\net9.0\MAC.RazorAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\net9.0\appsettings.Development.json" />
+    <Content Include="bin\Debug\net9.0\appsettings.json" />
+    <Content Include="bin\Debug\net9.0\MAC.deps.json" />
+    <Content Include="bin\Debug\net9.0\MAC.runtimeconfig.json" />
+    <Content Include="bin\Debug\net9.0\MAC.staticwebassets.endpoints.json" />
+    <Content Include="bin\Debug\net9.0\MAC.staticwebassets.runtime.json" />
+    <Content Include="obj\Debug\net9.0\ApiEndpoints.json" />
+    <Content Include="obj\Debug\net9.0\MAC.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\net9.0\MAC.sourcelink.json" />
+    <Content Include="obj\Debug\net9.0\rbcswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net9.0\rjimswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net9.0\rjsmcshtml.dswa.cache.json" />
+    <Content Include="obj\Debug\net9.0\rjsmrazor.dswa.cache.json" />
+    <Content Include="obj\Debug\net9.0\rpswa.dswa.cache.json" />
+    <Content Include="obj\Debug\net9.0\scopedcss\bundle\MAC.styles.css" />
+    <Content Include="obj\Debug\net9.0\scopedcss\projectbundle\MAC.bundle.scp.css" />
+    <Content Include="obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css" />
+    <Content Include="obj\Debug\net9.0\staticwebassets.build.endpoints.json" />
+    <Content Include="obj\Debug\net9.0\staticwebassets.build.json" />
+    <Content Include="obj\Debug\net9.0\staticwebassets.development.json" />
+    <Content Include="obj\Debug\net9.0\staticwebassets.references.upToDateCheck.txt" />
+    <Content Include="obj\Debug\net9.0\staticwebassets.removed.txt" />
+    <Content Include="obj\Debug\net9.0\staticwebassets.upToDateCheck.txt" />
+    <Content Include="obj\MAC.csproj.nuget.dgspec.json" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.14.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include=".github\workflows\" />
+    <Folder Include="obj\Debug\net9.0\staticwebassets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\net9.0\BouncyCastle.Cryptography.dll" />
+    <None Include="bin\Debug\net9.0\MAC.dll" />
+    <None Include="bin\Debug\net9.0\MAC.exe" />
+    <None Include="bin\Debug\net9.0\MAC.pdb" />
+    <None Include="bin\Debug\net9.0\MailKit.dll" />
+    <None Include="bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Abstractions.dll" />
+    <None Include="bin\Debug\net9.0\Microsoft.EntityFrameworkCore.dll" />
+    <None Include="bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.dll" />
+    <None Include="bin\Debug\net9.0\MimeKit.dll" />
+    <None Include="bin\Debug\net9.0\MySqlConnector.dll" />
+    <None Include="bin\Debug\net9.0\Pomelo.EntityFrameworkCore.MySql.dll" />
+    <None Include="MAC.sln" />
+    <None Include="obj\Debug\net9.0\apphost.exe" />
+    <None Include="obj\Debug\net9.0\compressed\04qhkkf5rw-87fc7y1x7t.gz" />
+    <None Include="obj\Debug\net9.0\compressed\0jyvbzj38l-cosvhxvwiu.gz" />
+    <None Include="obj\Debug\net9.0\compressed\0pl94g9i9b-hrwsygsryq.gz" />
+    <None Include="obj\Debug\net9.0\compressed\41z09wh4x9-fvhpjtyr6v.gz" />
+    <None Include="obj\Debug\net9.0\compressed\4i8gn4b0l8-ltid2c489k.gz" />
+    <None Include="obj\Debug\net9.0\compressed\4i8gn4b0l8-vr1egmr9el.gz" />
+    <None Include="obj\Debug\net9.0\compressed\4ri0mk5hjb-m9qm4tazc0.gz" />
+    <None Include="obj\Debug\net9.0\compressed\4ri0mk5hjb-o1o13a6vjx.gz" />
+    <None Include="obj\Debug\net9.0\compressed\519yj307iz-493y06b0oq.gz" />
+    <None Include="obj\Debug\net9.0\compressed\519yj307iz-hd3gran6i8.gz" />
+    <None Include="obj\Debug\net9.0\compressed\5vmcdekn0h-ee0r1s7dh0.gz" />
+    <None Include="obj\Debug\net9.0\compressed\6inq01340l-356vix0kms.gz" />
+    <None Include="obj\Debug\net9.0\compressed\86uoc6w362-61n19gt1b8.gz" />
+    <None Include="obj\Debug\net9.0\compressed\8rtxscr10h-ausgxo2sd3.gz" />
+    <None Include="obj\Debug\net9.0\compressed\96otseixs3-4d85u1mtcx.gz" />
+    <None Include="obj\Debug\net9.0\compressed\96otseixs3-63fj8s7r0e.gz" />
+    <None Include="obj\Debug\net9.0\compressed\9ymsukrdba-48y08845bh.gz" />
+    <None Include="obj\Debug\net9.0\compressed\9ymsukrdba-4v8eqarkd7.gz" />
+    <None Include="obj\Debug\net9.0\compressed\ah2mx9m2ku-erw9l3u2r3.gz" />
+    <None Include="obj\Debug\net9.0\compressed\ah2mx9m2ku-sejl45xvog.gz" />
+    <None Include="obj\Debug\net9.0\compressed\asiqdj462j-x0q3zqp4vz.gz" />
+    <None Include="obj\Debug\net9.0\compressed\atcyxv0t19-lcd1t2u6c8.gz" />
+    <None Include="obj\Debug\net9.0\compressed\atcyxv0t19-wl58j5mj3v.gz" />
+    <None Include="obj\Debug\net9.0\compressed\b0ozi22hdi-jd9uben2k1.gz" />
+    <None Include="obj\Debug\net9.0\compressed\b3b5a8jqxw-iovd86k7lj.gz" />
+    <None Include="obj\Debug\net9.0\compressed\coas1m4czv-6pdc2jztkx.gz" />
+    <None Include="obj\Debug\net9.0\compressed\cqddv210yi-lzl9nlhx6b.gz" />
+    <None Include="obj\Debug\net9.0\compressed\cqddv210yi-worgj0nhwm.gz" />
+    <None Include="obj\Debug\net9.0\compressed\cqjw7684zv-2x6gpulg9a.gz" />
+    <None Include="obj\Debug\net9.0\compressed\d0183fwxgy-06098lyss8.gz" />
+    <None Include="obj\Debug\net9.0\compressed\d0183fwxgy-keugtjm085.gz" />
+    <None Include="obj\Debug\net9.0\compressed\d7ykqvgwa0-y7v9cxd14o.gz" />
+    <None Include="obj\Debug\net9.0\compressed\eg6oc15snj-h1s4sie4z3.gz" />
+    <None Include="obj\Debug\net9.0\compressed\egjz7q4a4o-ft3s53vfgj.gz" />
+    <None Include="obj\Debug\net9.0\compressed\f8o3rjszq3-ttgo8qnofa.gz" />
+    <None Include="obj\Debug\net9.0\compressed\fltrrtb94i-2z0ns9nrw6.gz" />
+    <None Include="obj\Debug\net9.0\compressed\fltrrtb94i-jjsuc0puko.gz" />
+    <None Include="obj\Debug\net9.0\compressed\fx0elz2ios-c2jlpeoesf.gz" />
+    <None Include="obj\Debug\net9.0\compressed\fxrlb0u5om-c2oey78nd0.gz" />
+    <None Include="obj\Debug\net9.0\compressed\h5vs52bjbu-22vffe00uq.gz" />
+    <None Include="obj\Debug\net9.0\compressed\h5vs52bjbu-k8d9w2qqmf.gz" />
+    <None Include="obj\Debug\net9.0\compressed\hamkoyn0hq-kbrnm935zg.gz" />
+    <None Include="obj\Debug\net9.0\compressed\hg5tq2fg7x-dxx9fxp4il.gz" />
+    <None Include="obj\Debug\net9.0\compressed\hg5tq2fg7x-q9ht133ko3.gz" />
+    <None Include="obj\Debug\net9.0\compressed\iik5iycrg8-8vyfqsqgz1.gz" />
+    <None Include="obj\Debug\net9.0\compressed\iik5iycrg8-jj8uyg4cgr.gz" />
+    <None Include="obj\Debug\net9.0\compressed\isjjrhwk7d-fsbi9cje9m.gz" />
+    <None Include="obj\Debug\net9.0\compressed\ixld00e6k3-aa30vz7nho.gz" />
+    <None Include="obj\Debug\net9.0\compressed\j0zt3hcld8-7darc757le.gz" />
+    <None Include="obj\Debug\net9.0\compressed\kbkbk9oglj-nvvlpmu67g.gz" />
+    <None Include="obj\Debug\net9.0\compressed\l1hgh34wf4-bqjiyaj88i.gz" />
+    <None Include="obj\Debug\net9.0\compressed\l1hgh34wf4-t1cqhe9u97.gz" />
+    <None Include="obj\Debug\net9.0\compressed\l73zqbs40s-1wi6qxkvmo.gz" />
+    <None Include="obj\Debug\net9.0\compressed\l8y3ccthwd-0i3buxo5is.gz" />
+    <None Include="obj\Debug\net9.0\compressed\l8y3ccthwd-d6nrnj6jjx.gz" />
+    <None Include="obj\Debug\net9.0\compressed\mfm4en7i1f-c63t5i9ira.gz" />
+    <None Include="obj\Debug\net9.0\compressed\mfm4en7i1f-pk9g2wxc8p.gz" />
+    <None Include="obj\Debug\net9.0\compressed\mjb121dzxq-rxsg74s51o.gz" />
+    <None Include="obj\Debug\net9.0\compressed\mjb121dzxq-rzd6atqjts.gz" />
+    <None Include="obj\Debug\net9.0\compressed\n5xpzdzwrk-4094rpi4f9.gz" />
+    <None Include="obj\Debug\net9.0\compressed\n5xpzdzwrk-6cfz1n2cew.gz" />
+    <None Include="obj\Debug\net9.0\compressed\nu4gr9ravp-aexeepp0ev.gz" />
+    <None Include="obj\Debug\net9.0\compressed\ooj1d4otvp-37tfw0ft22.gz" />
+    <None Include="obj\Debug\net9.0\compressed\ooj1d4otvp-ynyaa8k90p.gz" />
+    <None Include="obj\Debug\net9.0\compressed\osevh7ulf0-pj5nd1wqec.gz" />
+    <None Include="obj\Debug\net9.0\compressed\p3wqb69oy4-03hjc8e09r.gz" />
+    <None Include="obj\Debug\net9.0\compressed\p3wqb69oy4-47otxtyo56.gz" />
+    <None Include="obj\Debug\net9.0\compressed\pfmsj6uyji-d7shbmvgxk.gz" />
+    <None Include="obj\Debug\net9.0\compressed\pfmsj6uyji-xvp3kq03qx.gz" />
+    <None Include="obj\Debug\net9.0\compressed\plwdpw3y18-0j3bgjxly4.gz" />
+    <None Include="obj\Debug\net9.0\compressed\q27csrolrr-qesaa3a1fm.gz" />
+    <None Include="obj\Debug\net9.0\compressed\q27csrolrr-ub07r2b239.gz" />
+    <None Include="obj\Debug\net9.0\compressed\q3vsu109he-43atpzeawx.gz" />
+    <None Include="obj\Debug\net9.0\compressed\q3vsu109he-46ein0sx1k.gz" />
+    <None Include="obj\Debug\net9.0\compressed\rs65320yt9-mrlpezrjn3.gz" />
+    <None Include="obj\Debug\net9.0\compressed\s366faeksw-aa30vz7nho.gz" />
+    <None Include="obj\Debug\net9.0\compressed\s8q0vr8y22-mlv21k5csn.gz" />
+    <None Include="obj\Debug\net9.0\compressed\tdgmtmswcd-s35ty4nyc5.gz" />
+    <None Include="obj\Debug\net9.0\compressed\tdgmtmswcd-zub09dkrxp.gz" />
+    <None Include="obj\Debug\net9.0\compressed\tfols1aixy-gye83jo8yx.gz" />
+    <None Include="obj\Debug\net9.0\compressed\tfols1aixy-khv3u5hwcm.gz" />
+    <None Include="obj\Debug\net9.0\compressed\txw5l2v7mm-ag7o75518u.gz" />
+    <None Include="obj\Debug\net9.0\compressed\txw5l2v7mm-gk0pw8i4co.gz" />
+    <None Include="obj\Debug\net9.0\compressed\u8p9tflk2v-j5mq2jizvt.gz" />
+    <None Include="obj\Debug\net9.0\compressed\ujr5321nq0-83jwlth58m.gz" />
+    <None Include="obj\Debug\net9.0\compressed\wa8vf4e6tf-9vr69e8ynj.gz" />
+    <None Include="obj\Debug\net9.0\compressed\wa8vf4e6tf-muycvpuwrr.gz" />
+    <None Include="obj\Debug\net9.0\compressed\whalli7whm-b7pk76d08c.gz" />
+    <None Include="obj\Debug\net9.0\compressed\whalli7whm-tmc1g35s3z.gz" />
+    <None Include="obj\Debug\net9.0\compressed\wwgosd96w2-notf2xhcfb.gz" />
+    <None Include="obj\Debug\net9.0\compressed\wwgosd96w2-u9q1upor1n.gz" />
+    <None Include="obj\Debug\net9.0\compressed\x8lqty595i-d4r6k3f320.gz" />
+    <None Include="obj\Debug\net9.0\compressed\x8lqty595i-tdbxkamptv.gz" />
+    <None Include="obj\Debug\net9.0\compressed\xv1qzjp168-r4e9w2rdcm.gz" />
+    <None Include="obj\Debug\net9.0\compressed\ykxfkfbfu1-v0zj4ognzu.gz" />
+    <None Include="obj\Debug\net9.0\MAC.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net9.0\MAC.assets.cache" />
+    <None Include="obj\Debug\net9.0\MAC.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net9.0\MAC.csproj.BuildWithSkipAnalyzers" />
+    <None Include="obj\Debug\net9.0\MAC.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net9.0\MAC.csproj.Up2Date" />
+    <None Include="obj\Debug\net9.0\MAC.dll" />
+    <None Include="obj\Debug\net9.0\MAC.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net9.0\MAC.genruntimeconfig.cache" />
+    <None Include="obj\Debug\net9.0\MAC.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net9.0\MAC.pdb" />
+    <None Include="obj\Debug\net9.0\MAC.RazorAssemblyInfo.cache" />
+    <None Include="obj\Debug\net9.0\refint\MAC.dll" />
+    <None Include="obj\Debug\net9.0\ref\MAC.dll" />
+    <None Include="obj\Debug\net9.0\staticwebassets.build.json.cache" />
+    <None Include="obj\MAC.csproj.nuget.g.props" />
+    <None Include="obj\MAC.csproj.nuget.g.targets" />
+    <None Include="obj\project.nuget.cache" />
   </ItemGroup>
 
 </Project>

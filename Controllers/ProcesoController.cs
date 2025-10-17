@@ -54,5 +54,19 @@ namespace TuProyecto.Controllers
 
             return View(proceso);
         }
+        [HttpPost]
+        public IActionResult ActualizarActivo(int id, int activo)
+        {
+            var proceso = _context.Procesos.FirstOrDefault(p => p.Id == id);
+            if (proceso == null)
+            {
+                return NotFound();
+            }
+
+            proceso.activo = activo;
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
     }
