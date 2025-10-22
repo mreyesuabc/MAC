@@ -74,7 +74,6 @@ wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
 C:\SISTEMAS\VARIOS\MAC\wwwroot\css\mystyle.css
-C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
 C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
@@ -129,10 +128,11 @@ C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery-validation\LICENSE.md
 C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.js
 C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.min.js
 C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.min.map
+C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.slim.js
 C:\SISTEMAS\VARIOS\MAC\wwwroot\css\site.css
-C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.slim.min.js
-C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\LICENSE.txt
-C:\SISTEMAS\VARIOS\MAC\wwwroot\favicon.ico
 C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\SISTEMAS\VARIOS\MAC\wwwroot\js\site.js
-C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.slim.js
+C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\LICENSE.txt
+C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+C:\SISTEMAS\VARIOS\MAC\wwwroot\lib\jquery\dist\jquery.slim.min.js
+C:\SISTEMAS\VARIOS\MAC\wwwroot\favicon.ico

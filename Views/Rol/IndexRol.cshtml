@@ -5,6 +5,19 @@
     var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
     var roles = ViewBag.Roles as string ?? "";
 }
+<style>
+    input.descripcion[disabled] {
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        box-shadow: none;
+        width: 100%;
+        font-size: inherit;
+        font-family: inherit;
+    }
+</style>
 @section Scripts {
     <script>
         $(document).ready(function () {
@@ -34,16 +47,11 @@
                     <button class="btn btn-outline-secondary btn-sm" style="width: 200px;" type="button" id="btnAgregar" onclick="openModal()">
                         <span class="fa fa-plus-circle text-primary"></span> Agregar
                     </button>
-                </li>
-                <li>
-                    <button class="btn btn-outline-secondary grid-exportar-excel btn-sm" style="width: 200px;" type="button" id="btExcel" onclick="exportTableToExcel('tablaConsulta', 'datos')">
-                        <span class="fa fa-file-excel-o text-success"></span> Exportar Excel
-                    </button>
-                </li>
+                </li>                
             </ul>
         </div>
 
-        <h2>Mantenimiento de Roles</h2>
+        <h2>Administración de Roles</h2>
        <table class="table table-striped" style="border:thin" id="tablaConsulta">
             <thead>
                 <tr>
@@ -58,12 +66,19 @@
                 {
                     <tr>
                         <td>
-                            <button class="btn btn-sm " title="Editar" onclick="editarRol('@rol.Id')">
+                        <button class="btn btn-sm " title="Editar" onclick="editarRol('@rol.Id')">
                                 <i class="fa fa-pencil" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
                             </button>
                         </td>
                         <td>@rol.Id</td>
-                        <td>@rol.descr</td>
+                    <td>
+                        <input type="text"
+                               value="@rol.descr"
+                               class="descripcion"
+                               data-id="@rol.Id"
+                               disabled />
+                    </td>
+
                         <td>
                             <input type="checkbox"
                                    class="activo-checkbox"
@@ -129,4 +144,57 @@
              if (mensajeError) mensajeError.style.display = "none";
 
          }, 2000);
-    </script>
+
+
+    function editarRol(id) {
+        const input = document.querySelector(`input.descripcion[data-id="${id}"]`);
+
+        if (!input) return;
+
+        input.disabled = false;
+        input.focus();
+
+        // Evitar múltiples bindings
+        input.removeEventListener('blur', input._blurHandler);
+        input.removeEventListener('keypress', input._keypressHandler);
+
+        // Definir handlers
+        input._blurHandler = function () {
+            guardarDescripcion(id, input.value, input);
+        };
+
+        input._keypressHandler = function (e) {
+            if (e.key === 'Enter') {
+                guardarDescripcion(id, input.value, input);
+            }
+        };
+
+        // Asignar eventos
+        input.addEventListener('blur', input._blurHandler);
+        input.addEventListener('keypress', input._keypressHandler);
+    }
+
+    function guardarDescripcion(id, nuevaDescripcion, input) {
+        fetch('/Rol/ActualizarDescripcion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `id=${encodeURIComponent(id)}&descripcion=${encodeURIComponent(nuevaDescripcion)}`
+        })
+        .then(response => {
+            if (response.ok) {
+                input.disabled = true;
+                console.log('Descripción actualizada');
+            } else {
+                alert('Error al actualizar');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al actualizar');
+        });
+    }
+
+
+</script>

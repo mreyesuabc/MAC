@@ -182,3 +182,10 @@ footer[role="contentinfo"] p {
      padding: 20px;
      margin-left: 220px; /* Ajusta el margen izquierdo para que el contenido principal se alinee correctamente */
  }
+input.descripcion[disabled] {
+    border: none;
+    background: transparent;
+    color: #000; /* o el color que uses para texto */
+    font-size: 14px; /* ajusta según tu diseño */
+    padding: 0;
+}

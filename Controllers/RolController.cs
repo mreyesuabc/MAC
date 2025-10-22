@@ -99,6 +99,17 @@ public class RolController : Controller
 
         return Ok();
     }
+    [HttpPost]
+    public IActionResult ActualizarDescripcion(int id, string descripcion)
+    {
+        var rol = _context.Rol.Find(id);
+        if (rol == null) return NotFound();
+
+        rol.descr = descripcion;
+        _context.SaveChanges();
+
+        return Ok();
+    }
 
 }
 

@@ -7,6 +7,11 @@ namespace MAC.Models
     public class RolProceso
     {
         public int RolId { get; set; }
+        [NotMapped]
+        public Rol rolInfo { get; set; }
         public int ProcesoId { get; set; }
+     
+        [NotMapped]
+        public Proceso procesoInfo { get; set; }
     }
 }

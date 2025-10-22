@@ -20,7 +20,7 @@
             </ul>
         </div>
 
-        <h2>Lista de Procesos</h2>        
+        <h2>Asignación de Procesos al Rol</h2>        
         <table class="table table-striped" style="border:thin" id="tablaConsulta">
             <thead>
                 <tr>
@@ -38,8 +38,8 @@
                                 <i class="fa fa-pencil" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
                             </button>
                         </td>
-                        <td>@rolProceso.RolId</td>
-                        <td>@rolProceso.ProcesoId</td>
+                    <td>@rolProceso.rolInfo.descr</td>
+                    <td>@rolProceso.procesoInfo.descr</td>
                     </tr>
                 }
             </tbody>

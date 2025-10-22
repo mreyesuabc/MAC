@@ -45,6 +45,12 @@ namespace MAC.Models
             modelBuilder.Entity<Usuario>().HasOne(u => u.rolInfo)
                        .WithMany()
                        .HasForeignKey(u => u.rol);
+            modelBuilder.Entity<RolProceso>().HasOne(u => u.procesoInfo)
+                        .WithMany()
+                        .HasForeignKey(u => u.ProcesoId);
+            modelBuilder.Entity<RolProceso>().HasOne(u => u.rolInfo)
+                       .WithMany()
+                       .HasForeignKey(u => u.RolId);
 
 
             // Puedes agregar más configuraciones aquí si es necesario
