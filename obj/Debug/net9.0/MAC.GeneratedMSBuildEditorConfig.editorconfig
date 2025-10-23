@@ -40,6 +40,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvY2Vzb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/SISTEMAS/VARIOS/MAC/Views/Proceso/_AddProceso.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvY2Vzb1xfQWRkUHJvY2Vzby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/SISTEMAS/VARIOS/MAC/Views/Proceso/_EditarProceso.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvY2Vzb1xfRWRpdGFyUHJvY2Vzby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/SISTEMAS/VARIOS/MAC/Views/RolProceso/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sUHJvY2Vzb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

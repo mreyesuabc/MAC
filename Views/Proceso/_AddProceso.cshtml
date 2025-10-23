@@ -1,0 +1,68 @@
+﻿<div class="modal" id="myModal" aria-hidden="true">
+    <div class="modal-content">
+        <form asp-controller="Proceso" asp-action="AddProceso" method="post">
+            <div class="row">
+                <div class="col-4">
+                    <span class="text-danger">*</span><span class="fw-bold">Descripción</span>
+                    <input type="text" id="descr" name="descr" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="col-4">
+                    <span class="text-danger">*</span><span class="fw-bold">Controlador </span>
+                    <input type="text" id="controlador" name="controlador" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="col-4">
+                    <span class="text-danger">*</span><span class="fw-bold">Acción </span>
+                    <input type="text" id="accion" name="accion" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="col-2">
+                    <span class="text-danger">*</span><span class="fw-bold">Icono </span>
+                    <div class="input-group">
+                        <input type="text" id="icono" name="icono" class="form-control" placeholder="Selecciona un ícono" readonly>
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fa fa-icons"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-home"><i class="fa fa-home"></i> Home</a></li>
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-user"><i class="fa fa-user"></i> Usuario</a></li>
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-cog"><i class="fa fa-cog"></i> Configuración</a></li>
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-id-badge"><i class="fa fa-id-badge"></i> ID Badge</a></li>
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-list"><i class="fa fa-list"></i> Lista</a></li>
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-link"><i class="fa fa-link"></i> Enlace</a></li>
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-user-cog"><i class="fa fa-user-cog"></i> UsrConfig</a></li>
+                            <li><a class="dropdown-item icon-option" data-icon="fa fa-tools"><i class="fa fa-tools"></i> Herramientas</a></li>                            
+                        </ul>
+                     </div>
+                </div>
+                <div class="col-3">
+                    <span class="text-danger">*</span><span class="fw-bold">Orden </span>
+                    <input type="text" id="orden" name="orden" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="col-3">
+                    <span class="fw-bold">Padre ID </span>
+                    <input type="text" id="padreId" name="padreId" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="col-2">
+                    <span class="text-danger">*</span><span class="fw-bold">Activo </span>
+                    <input type="checkbox" id="activo" name="activo" value="1" checked class="form-check-input" />
+                </div>
+                
+
+                <br>
+            </div>
+            <br><br>
+            <div class="form-group col-sm-4 text-right" style="align-items: end;">
+                <ul class="list-inline text-right">
+                    <li><button class="btn btn-block btn-sm btn-primary" style="width: 200px; text-align: center;" type="submit" id="btnGuardar"><span class="fa fa-check"></span>Guardar Cambios</button></li>
+                    <li><button class="btn btn-sm btn-warning" style="width: 200px; text-align: center;" type="button" id="btnCerrar" onclick="closeModal()"><span class="fa fa-times"></span>Cerrar</button></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.querySelectorAll('.icon-option').forEach(item => {
+        item.addEventListener('click', function() {
+            document.getElementById('icono').value = this.dataset.icon;
+        });
+    });
+</script>

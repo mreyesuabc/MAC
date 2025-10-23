@@ -61,7 +61,7 @@
                 {
                     <tr>
                         <td>
-                            <button class="btn btn-sm " title="Editar" onclick="editarUsuario('@proceso.Id')">
+                            <button class="btn btn-sm " title="Editar" onclick="editarProceso('@proceso.Id')">
                                 <i class="fa fa-pencil" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
                             </button>                        
                         </td>
@@ -84,4 +84,39 @@
             </tbody>
         </table>
     </main>
-   
+<!-- Contenedor para cargar el modal de edición -->
+<div id="modalContainer"></div>
+
+@Html.Partial("_AddProceso")
+<script>
+     function openModal() {
+         const modalElement = document.getElementById("myModal");
+         const modal = new bootstrap.Modal(modalElement);
+         modal.show();
+         setTimeout();
+     }
+    function editarProceso(id) {
+          $.ajax({
+               url: '/Proceso/EditarProcesoParcial?id=' + id,
+               type: 'GET',
+               success: function (data) {
+                   $('#modalContainer').html(data);
+                     const modalElement = document.getElementById("modalEditarProceso");
+                     const modal = new bootstrap.Modal(modalElement);
+                     modal.show();
+               }
+           });
+       }
+    function GuardarCambiosProceso() {
+            var formData = $('#formEditarProceso').serialize();
+            $.ajax({
+                url: '/Proceso/GuardarCambiosProceso',
+                type: 'POST',
+                data: formData,
+                success: function () {
+                    $('#modalContainer .modal').modal('hide');
+                    location.reload(); // o actualizar solo la tabla
+                }
+            });
+        }
+</script>

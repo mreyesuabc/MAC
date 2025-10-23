@@ -102,72 +102,20 @@ public class RolController : Controller
     [HttpPost]
     public IActionResult ActualizarDescripcion(int id, string descripcion)
     {
+
         var rol = _context.Rol.Find(id);
-        if (rol == null) return NotFound();
+        if (rol == null)
+        {
+            TempData["MensajeError"] = "Rol no encontrado.";
+            return BadRequest(); // O StatusCode(400)
+        }
 
         rol.descr = descripcion;
         _context.SaveChanges();
 
+        TempData["MensajeExito"] = "Descripción actualizada correctamente.";
         return Ok();
+
     }
 
 }
-
-//using MAC.Models;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using System.Linq;
-
-//public class RolController : Controller
-//{
-//    private readonly MACDbContext _context;
-
-//    public RolController(MACDbContext context)
-//    {
-//        _context = context;
-//    }
-
-//    // Mostrar roles existentes usando la vista IndexRol.cshtml
-//    public IActionResult IndexRol()
-//    {
-//        var listaRoles = _context.Rol.ToList();
-//        ViewBag.CurrentController = "Rol";
-//        ViewBag.CurrentAction = "IndexRol"; 
-//        return View(listaRoles);
-//    }
-
-//    [HttpPost]
-//    public async Task<IActionResult> AddRol(Rol rol)
-//    {
-//        if (ModelState.IsValid)
-//        {
-//            _context.Rol.Add(rol);
-//            await _context.SaveChangesAsync();
-//            TempData["Mensaje"] = "Rol registrado correctamente.";
-//            ViewBag.CurrentController = "Rol";
-//            ViewBag.CurrentAction = "Roles";
-//            return RedirectToAction("Index");
-//        }
-
-//        var errores = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-//        TempData["Errores"] = errores;
-//        ViewBag.CurrentController = "Rol";
-//        ViewBag.CurrentAction = "Roles";
-//        return RedirectToAction("Index");
-//    }
-
-
-
-//    [HttpPost]
-//    public IActionResult ToggleActivo(int id)
-//    {
-//        var rol = _context.Rol.Find(id);
-//        if (rol != null)
-//        {
-//            rol.activo = !rol.activo; // Invertir el valor booleano
-//            _context.SaveChanges();
-//        }
-//        return RedirectToAction(nameof(Index)); // Asegúrate que esta vista exista
-//    }
-
-//}

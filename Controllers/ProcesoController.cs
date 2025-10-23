@@ -1,5 +1,6 @@
 ﻿using MAC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 
 namespace TuProyecto.Controllers
@@ -23,37 +24,72 @@ namespace TuProyecto.Controllers
             ViewBag.CurrentAction = "Index";
             return View(procesos);
         }
-
-        // Acción para editar un proceso
-        public IActionResult Edit(int id)
+        public IActionResult EditarProcesoParcial(int id)
         {
-            var proceso = _context.Procesos.Find(id);
+            var proceso = _context.Procesos.FirstOrDefault(u => u.Id == id);
             if (proceso == null)
+            {
+                return NotFound();
+            }            
+            return PartialView("_EditarProceso", proceso);
+        }
+        [HttpPost]
+        public IActionResult GuardarCambiosProceso(Proceso proceso)
+        {
+            var procesoDb = _context.Procesos.FirstOrDefault(u => u.Id == proceso.Id);
+            if (procesoDb == null)
             {
                 return NotFound();
             }
 
-            return View(proceso);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Proceso proceso)
-        {
-            if (id != proceso.Id)
+            procesoDb.descr = proceso.descr;
+            procesoDb.controlador = proceso.controlador;
+            procesoDb.accion = proceso.accion;
+            procesoDb.icono = proceso.icono;
+            procesoDb.orden = proceso.orden;
+            procesoDb.padreId = proceso.padreId;
+            try
             {
-                return BadRequest();
-            }
-
-            if (ModelState.IsValid)
-            {
-                _context.Update(proceso);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
+                TempData["Mensaje"] = "Se actualizó información correctamente.";
 
-            return View(proceso);
+            }
+            catch (Exception ex)
+            {
+                TempData["Errores"] = "No fue posible actualizar la información del proceso." + ex;
+            }
+            return Ok();
         }
+        //// Acción para editar un proceso
+        //public IActionResult Edit(int id)
+        //{
+        //    var proceso = _context.Procesos.Find(id);
+        //    if (proceso == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(proceso);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Edit(int id, Proceso proceso)
+        //{
+        //    if (id != proceso.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Update(proceso);
+        //        _context.SaveChanges();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    return View(proceso);
+        //}
         [HttpPost]
         public IActionResult ActualizarActivo(int id, int activo)
         {
@@ -67,6 +103,25 @@ namespace TuProyecto.Controllers
             _context.SaveChanges();
 
             return Ok();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddProceso(Proceso proceso)
+        {
+            if (ModelState.IsValid)
+            {
+
+                _context.Procesos.Add(proceso);
+                await _context.SaveChangesAsync();
+                TempData["Mensaje"] = "Proceso registrado correctamente.";
+                ViewBag.CurrentController = "Proceso";
+                ViewBag.CurrentAction = "Index";
+                return RedirectToAction("Index");
+            }
+            var errores = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+            TempData["Errores"] = errores;
+            ViewBag.CurrentController = "Proceso";
+            ViewBag.CurrentAction = "Index";
+            return RedirectToAction("Index");
         }
     }
     }

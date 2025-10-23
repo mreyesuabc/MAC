@@ -20,7 +20,8 @@ namespace MAC.Controllers
                 .Include(rp => rp.rolInfo)
                 .Include(rp => rp.procesoInfo)
                 .ToList();
-
+            ViewBag.CurrentController = "RolProceso";
+            ViewBag.CurrentAction = "Index";
             return View(rolProcesos); // Aquí estás pasando una lista de RolProceso
         }
         public IActionResult AsignacionProcesos(int? rolId)

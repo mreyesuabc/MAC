@@ -103,98 +103,56 @@
              const modal = new bootstrap.Modal(modalElement);
              modal.show();
              setTimeout();
-         }
-         function editarRol(id) {
-             $.ajax({
-                 url: '/Rol/EditRolParcial?id=' + id,
-                 type: 'GET',
-                 success: function (data) {
-                     $('#modalContainer').html(data);
-                       const modalElement = document.getElementById("modalEditRol");
-                       const modal = new bootstrap.Modal(modalElement);
-                       modal.show();
-                 }
-             });
-         }
-        function guardarCambiosRol() {
-             var formData = $('#formEditRol').serialize();
-             $.ajax({
-                 url: '/Rol/GuardarCambiosRol',
-                 type: 'POST',
-                 data: formData,
-                 success: function () {
-                     $('#modalContainer .modal').modal('hide');
-                     location.reload(); // o actualizar solo la tabla
-                 }
-             });
-         }
+         }        
 
-         function mostrarMensaje(mensaje, exito) {
-             const div = document.getElementById("mensajeExito");
-             div.className = `alert ${exito ? 'alert-success' : 'alert-danger'}`;
-             div.textContent = mensaje;
-             div.style.display = "block";
-         }
+        function editarRol(id) {
+            const input = document.querySelector(`input.descripcion[data-id="${id}"]`);
 
-         setTimeout(function () {
-             const mensajeExito = document.getElementById("mensajeExito");
-             const mensajeError = document.getElementById("mensajeError");
+            if (!input) return;
 
-             if (mensajeExito) mensajeExito.style.display = "none";
-             if (mensajeError) mensajeError.style.display = "none";
+            input.disabled = false;
+            input.focus();
 
-         }, 2000);
+            // Evitar múltiples bindings
+            input.removeEventListener('blur', input._blurHandler);
+            input.removeEventListener('keypress', input._keypressHandler);
 
-
-    function editarRol(id) {
-        const input = document.querySelector(`input.descripcion[data-id="${id}"]`);
-
-        if (!input) return;
-
-        input.disabled = false;
-        input.focus();
-
-        // Evitar múltiples bindings
-        input.removeEventListener('blur', input._blurHandler);
-        input.removeEventListener('keypress', input._keypressHandler);
-
-        // Definir handlers
-        input._blurHandler = function () {
-            guardarDescripcion(id, input.value, input);
-        };
-
-        input._keypressHandler = function (e) {
-            if (e.key === 'Enter') {
+            // Definir handlers
+            input._blurHandler = function () {
                 guardarDescripcion(id, input.value, input);
-            }
-        };
+            };
 
-        // Asignar eventos
-        input.addEventListener('blur', input._blurHandler);
-        input.addEventListener('keypress', input._keypressHandler);
-    }
+            input._keypressHandler = function (e) {
+                if (e.key === 'Enter') {
+                    guardarDescripcion(id, input.value, input);
+                }
+            };
 
-    function guardarDescripcion(id, nuevaDescripcion, input) {
-        fetch('/Rol/ActualizarDescripcion', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `id=${encodeURIComponent(id)}&descripcion=${encodeURIComponent(nuevaDescripcion)}`
-        })
-        .then(response => {
-            if (response.ok) {
-                input.disabled = true;
-                console.log('Descripción actualizada');
-            } else {
+            // Asignar eventos
+            input.addEventListener('blur', input._blurHandler);
+            input.addEventListener('keypress', input._keypressHandler);
+        }
+      function guardarDescripcion(id, nuevaDescripcion, input) {
+            fetch('/Rol/ActualizarDescripcion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `id=${encodeURIComponent(id)}&descripcion=${encodeURIComponent(nuevaDescripcion)}`
+            })
+            .then(response => {
+                if (response.ok) {
+                    input.disabled = true;
+                    console.log('Descripción actualizada');
+                } else {
+                    alert('Error al actualizar');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
                 alert('Error al actualizar');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al actualizar');
-        });
-    }
+            });
+        }
 
 
 </script>

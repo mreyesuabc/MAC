@@ -17,7 +17,7 @@ namespace MAC.Models
         public string icono { get; set; } = string.Empty;
         public int orden { get; set; } 
         public int activo { get; set; }
-        public string padreId { get; set; }
+        public string? padreId { get; set; }
 
 
     }
