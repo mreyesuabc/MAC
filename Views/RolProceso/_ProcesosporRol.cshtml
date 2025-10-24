@@ -1,0 +1,19 @@
+﻿@model List<Proceso>
+
+<table class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Nombre del Proceso</th>
+            <th>Activo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var proceso in Model)
+        {
+            <tr>
+               <td>@proceso.descr</td>
+                <td>@proceso.activo</td>
+            </tr>
+        }
+    </tbody>
+</table>

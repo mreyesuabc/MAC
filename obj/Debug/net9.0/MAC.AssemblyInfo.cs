@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MAC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+faccd36d2fe7eae0a8c330a4dd10856463f3bd7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39c205638ba3bb4195a9b4c75c84bf28c8e14e2d")]
 [assembly: System.Reflection.AssemblyProductAttribute("MAC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MAC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

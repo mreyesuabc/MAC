@@ -44,23 +44,17 @@ namespace MAC.Controllers
 
             return View(asignaciones.ToList());
         }
+        public IActionResult VerProcesosPorRol(int rolId)
+        {
+            // Obtener los procesos asignados al rol
+            var procesos = _context.RolProcesos
+                .Include(rp => rp.procesoInfo) // Incluye la información del proceso
+                .Where(rp => rp.RolId == rolId)
+                .Select(rp => rp.ProcesoId) // Selecciona solo los procesos
+                .ToList();
 
-        //public IActionResult Index()
-        //{
-        //    var rolProcesos = _context.RolProcesos
-        //    .Include(rp => rp.rolInfo)
-        //    .Include(rp => rp.procesoInfo)
-        //    .OrderBy(rp => rp.rolInfo.descr)
-        //.Select(rp => new {
-        //    RolId = rp.RolId,
-        //    ProcesoId = rp.ProcesoId,
-        //    RolDescripcion = rp.rolInfo.descr,
-        //    ProcesoDescripcion = rp.procesoInfo.descr
-        //})
-        //.ToList();
-        //    ViewBag.CurrentController = "RolProceso";
-        //    ViewBag.CurrentAction = "Index";
-        //    return View(Index);
-        //}
+            // Retorna la vista parcial con la lista de procesos
+            return PartialView("_ProcesosPorRol", procesos);
+        }
     }
 }

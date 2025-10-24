@@ -68,8 +68,11 @@
                         <td>
                         <button class="btn btn-sm " title="Editar" onclick="editarRol('@rol.Id')">
                                 <i class="fa fa-pencil" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
-                            </button>
-                        </td>
+                        </button>
+                        <button class="btn btn-sm " title="Procesos Asignados al Rol" onclick="verProcesoRol('@rol.Id')">
+                            <i class="fa fa-list" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
+                        </button>
+                    </td>
                         <td>@rol.Id</td>
                     <td>
                         <input type="text"
@@ -97,6 +100,19 @@
     <div id="modalContainer"></div>
 
     @Html.Partial("_AddRol")
+<div id="modalProcesosRol" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Procesos Asignados</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <div class="modal-body" id="contenidoProcesosRol">
+                    <!-- Aquí se carga la vista parcial -->
+             </div>
+         </div>
+      </div>
+    </div>
+</div>
     <script>
          function openModal() {
              const modalElement = document.getElementById("myModal");
@@ -153,6 +169,12 @@
                 alert('Error al actualizar');
             });
         }
+      function verProcesoRol(rolId) {
+        $.get('/RolProceso/VerProcesosPorRol', { rolId: rolId }, function (data) {
+            $('#contenidoProcesosRol').html(data);
+            $('#modalProcesosRol').modal('show');
+        });
+    }
 
 
 </script>

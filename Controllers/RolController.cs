@@ -4,6 +4,7 @@ using MAC.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
@@ -117,5 +118,4 @@ public class RolController : Controller
         return Ok();
 
     }
-
 }
