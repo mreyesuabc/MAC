@@ -1,0 +1,82 @@
+﻿@model MAC.Models.ViewModels.ProcesoRolViewModel
+<!-- Este ViewModel debe contener:
+     IEnumerable<ProcesoAsignadoViewModel> ProcesosAsignados
+     IEnumerable<ProcesoNoAsignado> ProcesosNoAsignados
+     int RolId
+-->
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5><i class="fa fa-list"></i> </h5>
+        <!-- Botón Agregar -->
+        <button class="btn btn-outline-secondary btn-sm" style="width: 100px; align-content:end" type="button" id="btnAgregar">
+            <span class="fa fa-plus-circle text-primary"></span> Agregar
+        </button>                
+    </div>
+    <div class="card-body">
+    <!-- Dropdown oculto inicialmente -->
+    <div id="divAgregarProceso" style="display:none;" class="mb-3 mt-2">
+        <select id="ddlProcesos" class="form-select">
+            <option value="">Seleccione un proceso</option>
+            @foreach (var proceso in Model.ProcesosNoAsignados)
+            {
+                <option value="@proceso.ProcesoId">@proceso.NombreMenu</option>
+            }
+        </select>
+        <button class="btn btn-sm btn-primary" style="width: 150px; text-align: center; align-content:end" type="submit" id="btnGuardarProceso">
+           <span class="fa fa-check"></span> Guardar Cambios
+        </button>        
+    </div>
+    <!-- Tabla -->
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Acción</th>
+                    <th>Descripción del Proceso</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var proceso in Model.ProcesosAsignados)
+                {
+                    <tr>
+                        <td>
+                            <button class="btn btn-sm " title="Eliminar" onclick="eliminarprocesoRol('@proceso.ProcesoId')">
+                                <i class="fa fa-trash" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
+                            </button>
+                        </td>
+                        <td>@proceso.NombreMenu</td>
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>       
+    </div>
+</div>
+<script>
+    // Delegación para manejar eventos en contenido dinámico
+    $(document).on("click", "#btnAgregar", function () {
+        $("#divAgregarProceso").toggle(); // Mostrar/ocultar el div
+    });
+   $(document).on("click", "#btnGuardarProceso", function () {
+    var procesoId = $("#ddlProcesos").val();
+    if (procesoId) {
+        $.post('/RolProceso/AgregarProceso', { rolId: @Model.RolId, procesoId: procesoId }, function () {
+            // Recargar la vista parcial en el modal
+            $.get('/RolProceso/ProcesosAsignados', { rolId: @Model.RolId }, function (html) {
+                $("#contenidoProcesosRol").html(html);
+            });
+        });
+    }
+});
+
+function eliminarprocesoRol(procesoId) {
+    $.post('/RolProceso/EliminarProceso', { rolId: @Model.RolId, procesoId: procesoId }, function () {
+        $.get('/RolProceso/ProcesosAsignados', { rolId: @Model.RolId }, function (html) {
+            $("#contenidoProcesosRol").html(html);
+        });
+    });
+}
+
+
+</script>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<MAC.Models.ViewModels.RolViewModel>
+@{
+    ViewBag.Title = "Asignación de Procesos a Roles del Sistema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var nombreCompleto = ViewBag.NombreCompleto as string ?? "Usuario";
+    var roles = ViewBag.Roles as string ?? "";
+}
+<style>
+    input.descripcion[disabled] {
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        box-shadow: none;
+        width: 100%;
+        font-size: inherit;
+        font-family: inherit;
+    }
+</style>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.activo-checkbox').on('change', function () {
+                var id = $(this).data('id');
+                var activo = $(this).is(':checked') ? 1 : 0;
+
+                $.ajax({
+                    url: '/Rol/ActualizarActivo',
+                    type: 'POST',
+                    data: { id: id, activo: activo },
+                    success: function () {
+                                           },
+                    error: function () {
+                        alert('Error al actualizar el estado');
+                    }
+                });
+            });
+        });
+    </script>
+}
+    <!-- Main content -->
+    <main class="col-md-10 p-4">
+       <h2>Asignación de Procesos al Rol</h2>
+       <table class="table table-striped" style="border:thin" id="tablaConsulta">
+            <thead>
+                <tr>
+                    <th>Accion</th>
+                    <th>Rol</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var rolProceso in Model)
+                {
+                    <tr>
+                        <td>
+                        <button class="btn btn-sm " title="Procesos Asignados al Rol" onclick="verProcesoRol('@rolProceso.RolId', '@rolProceso.RolDescr')">
+                            <i class="fa fa-list" style="cursor: pointer; color:#9d2449; font-size: 16px;"></i>
+                        </button>
+                    </td>
+                    <td>@rolProceso.RolId</td>
+                    <td>
+                        <input type="text"
+                               value="@rolProceso.RolDescr"
+                               class="descripcion"
+                               data-id="@rolProceso.RolId"
+                               disabled />
+                    </td>
+                    </tr>                 
+                }
+            </tbody>
+        </table>
+
+       
+    </main>
+<div id="modalProcesosRol" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Procesos Asignados al Rol </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="contenidoProcesosRol">
+                <!-- Aquí se cargará la vista parcial por AJAX -->
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+       function verProcesoRol(rolId,rolDescr) {
+          $(".modal-title").text("Procesos Asignados al Rol: " + rolDescr);
+     $.get('/RolProceso/ProcesosAsignados', { rolId: rolId }, function (data) {
+            $('#contenidoProcesosRol').html(data);
+            $('#modalProcesosRol').modal('show');
+        });
+        }
+    </script>
